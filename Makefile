@@ -10,7 +10,7 @@
 CC		:= gcc
 
 NAME		:= tetris
-FILES		:= main read errors
+FILES		:= get_file read errors
 
 SRC_NAMES 	:= $(addsuffix .c, $(FILES))
 SRC		:= $(addprefix src/, $(SRC_NAMES))

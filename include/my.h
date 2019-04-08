@@ -17,6 +17,7 @@
 #include <string.h>
 #include <errno.h>
 #include <signal.h>
+#include <fcntl.h>
 
 #ifndef MY_H_
 #define MY_H_
@@ -25,6 +26,7 @@
 typedef struct tetris_s {
     int get_number_tetrimino;
     char **register_tetrimino_file;
+    int get_max_size;
 } tetris_t;
 
 typedef struct solver {
