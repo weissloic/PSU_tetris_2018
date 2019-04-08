@@ -17,7 +17,7 @@ SRC		:= $(addprefix src/, $(SRC_NAMES))
 
 CINC		:= -I include/
 CFLAGS		:= -W -Wextra -Wall -g
-LDFLAGS		:= -L./lib/my -lmy -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
+LDFLAGS		:= -L./lib/my -lmy -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system -lcurses
 
 OBJ             := $(SRC:src/%.c=obj/%.o)
 
