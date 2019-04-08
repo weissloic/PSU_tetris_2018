@@ -22,30 +22,14 @@
 #define MY_H_
 #define READ_SIZE 80
 
-typedef struct global_t {
-    int pid_glob;
-    int var_x;
-    int var_y;
-    int counter;
-    int loop;
-    int connect_or_not;
-}global_t;
+typedef struct tetris_s {
+    int get_number_tetrimino;
+    char **register_tetrimino_file;
+} tetris_t;
 
-extern global_t *game;
-
-typedef struct navy {
-    char **boats;
-    char **create_map;
-    char **create_empty_map;
-    int vertical;
-    int horizontal;
-    int **value_one;
-    int **value_two;
-    int x;
-    int y;
-    int turn;
-    int ac;
-} navy_t;
+typedef struct solver {
+    char **map;
+} solver_t;
 
 void my_putchar(char c);
 int my_isneg(int nb);
