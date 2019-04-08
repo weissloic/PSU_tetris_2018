@@ -29,6 +29,10 @@ typedef struct tetris_s {
 
 typedef struct solver {
     char **map;
+    int lenght;
+    int width;
+    int cols;
+    int lines;
 } solver_t;
 
 void my_putchar(char c);
@@ -81,6 +85,9 @@ unsigned int my_put_unsigned_nbr(unsigned int nb);
 int my_put_unsigned_str(char const *str);
 void display_unprintable(va_list ap);
 void display_percentage();
+char **get_map(solver_t *solver, const char *path);
+int get_number_line(const char *path);
+static char **malloc_map(int line);
 
 static void (*ptr1[9])(va_list) = {
     &display_int,

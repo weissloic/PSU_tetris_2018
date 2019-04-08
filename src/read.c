@@ -4,6 +4,7 @@
 ** File description:
 ** [file description here]
 */
+#include "../include/my.h"
 
 static char **malloc_map(int line)
 {
@@ -47,20 +48,4 @@ char **get_map(solver_t *solver, const char *path)
     solver->map[i] = NULL;
     fclose(file);
     return solver->map;
-}
-
-
-
-int main(int ac, char **av)
-{
-    solver_t *solver = malloc(sizeof(solver_t));
-
-        solver->map = get_map(solver, av[1]);
-
-        int i = 0;
-
-        while (solver->map[i] != NULL) {
-            printf("%s", solver->map[i]);
-            i++;
-        }
 }

@@ -71,6 +71,18 @@ int manage_window(void)
 
 int main (int ac, char **av)
 {
+    solver_t *solver = malloc(sizeof(solver_t));
+    solver->map = get_map(solver, av[1]);
+
+    int i = 0;
+
+    while (solver->map[i] != NULL) {
+        printf("%s", solver->map[i]);
+        i++;
+    }
+    if (check_size(solver) == 84) {
+        return (84);
+    }
     manage_window();
     return (0);
 }
