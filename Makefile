@@ -2,33 +2,58 @@
 ## EPITECH PROJECT, 2018
 ## Makefile
 ## File description:
-## Makefile
+## makefile for do_op
 ##
 
-GCC=            gcc
+.RECIPEPREFIX +=
 
-SRC=		main.c
+CC		:= gcc
 
-LIB=		-Llib/my/ -lmy
+NAME		:= tetris
+FILES		:= main
 
-INC=            -I./include
+SRC_NAMES 	:= $(addsuffix .c, $(FILES))
+SRC		:= $(addprefix src/, $(SRC_NAMES))
 
-CSFML=		-lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
+CINC		:= -I include/
+CFLAGS		:= -W -Wextra -Wall -g
+LDFLAGS		:= -L./lib/my -lmy -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
 
-OBJ=            $(SRC:.c)
+OBJ             := $(SRC:src/%.c=obj/%.o)
 
-NAME=          	navy
+RED             := \033[0;31m
+CYAN            := \033[0;36m
+GOLD            := \033[0;33m
+GREEN           := \033[0;32m
+WHITE           := \033[0;0m
 
-all:            $(NAME)
+PREFIX		:= $(CYAN) "[$(NAME)]"
 
-$(NAME):
-		make -C ./lib/my
-		$(GCC) -g $(SRC) $(LIB) $(INC) $(CSFML) -o $(NAME)
+all:		createdir $(NAME)
+
+obj/%.o: src/%.c
+        @$(CC) -c $(CFLAGS) $(CINC) -o $@ $^
+        @echo "$(PREFIX) $(GREEN)$^ $(GOLD)=> $(GREEN)$@"
+
+$(NAME):        $(OBJ)
+        @make -sC lib/my
+        @echo "$(GOLD)Compiling...$(WHITE)\r"
+        @gcc $(OBJ) -o $(NAME) $(CINC) $(CFLAGS) $(LDFLAGS)
+        @echo "$(GOLD)Compiled !$(WHITE)"
+        @echo "$(RED)Delete $(GOLD)$(PWD)/obj/*.o$(WHITE)"
+        @rm -rf $(OBJ)
+        @rmdir obj
 
 clean:
-		rm -f *~ *#
+        @echo "$(RED)Delete $(GOLD)$(PWD_PATH)/obj/*.o$(WHITE)"
+        @rm -rf $(OBJ)
 
 fclean:         clean
-		rm $(NAME) libmy.a
+        @make -sC lib/my fclean
+        @echo "$(RED)Delete $(GOLD)$(PWD)/$(NAME)$(WHITE)"
+        @rm -rf $(NAME)
 
-re:	fclean all clean
+re:             fclean all clean
+
+createdir:
+        @mkdir -p obj
