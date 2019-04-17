@@ -39,6 +39,14 @@
             {NULL, 0, NULL, 0}
         };
 
+typedef struct tetrimono_s {
+    char **tetrimino;
+    int width;
+    int height;
+    int color;
+    int error_detected;
+} tetrimino_t;
+
 typedef struct tetris_s {
     int get_number_tetrimino;
     char **register_tetrimino_file;
@@ -56,6 +64,7 @@ typedef struct tetris_s {
     int map_size_col;
     int map_size_row;
     int without_next;
+    tetrimino_t *tetrimino;
 } tetris_t;
 
 typedef struct solver {

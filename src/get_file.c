@@ -7,12 +7,67 @@
 
 #include "my.h"
 
+char *my_strncpy(char *dest, char const *src, int n)
+{
+    int i = 0;
+
+    for (; i <= n; i++) {
+        dest[i] = src[i];
+        if (n == i)
+            dest[n] = '\0';
+    }
+    return (dest);
+}
+
+int size_line(char const *str)
+{
+    int n = 0;
+    int nb_line = 0;
+
+    while (str[n] != 0) {
+        if (str[n] == '\n')
+            nb_line++;
+        n++;
+    }
+    return (nb_line);
+}
+
+int condition(char c)
+{
+    if (c != '\t' && c != '\0' && c != '\n')
+        return (1);
+    return (0);
+}
+
+char **my_str_to_word_array(char const *buffer)
+{
+    char **word_array;
+    int n = 0;
+    int x = 0;
+    int y = 0;
+
+    word_array = malloc(sizeof(char *) * (size_line(buffer) + 1));
+    while (buffer[y] != '\0') {
+        for (x = 0; condition(buffer[x + y]); x++);
+        if (x != 0) {
+            word_array[n] = malloc(sizeof(char) * x + 1);
+            my_strncpy(word_array[n], buffer + y, x);
+            word_array[n][x] = '\0';
+            n++;
+            y += x;
+        }
+        if (buffer[y] != '\0')
+            y++;
+    }
+    word_array[n] = NULL;
+    return (word_array);
+}
 
 int display_help(void)
 {
     int fd;
     int size;
-    char buff[760];
+    char buff[730];
     buff[729] = '\0';
     fd = open("help", O_RDONLY);
     if (fd < 0)
@@ -23,6 +78,173 @@ int display_help(void)
     my_printf("%s\n", buff);
     close(fd);
     return (0);
+}
+
+int count_line_return(char *str)
+{
+    int counter = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == '\n')
+            counter++;
+    }
+    return (counter);
+}
+
+int get_size_file(tetris_t *tetris)
+{
+    struct stat fichier;
+    int counter_size = 0;
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        stat(tetris->strcat_register_tetrimino_file[i], &fichier);
+        counter_size += fichier.st_size;
+    }
+    return (counter_size);
+
+}
+
+int open_txt(tetris_t *tetris)
+{
+    char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
+
+    for (int i = 0; i != tetris->get_number_tetrimino; i++)
+        register_file[i] = malloc(sizeof(char) * 10);
+
+    int fd;
+    int size;
+
+    for (int k = 0; k != tetris->get_number_tetrimino; k++) {
+        fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
+        if (fd < 0)
+            return (84);
+        size = read(fd, register_file[k], (get_size_file(tetris) + 1));
+        if (size <= 0)
+            return (84);
+        printf("%s\n", register_file[k]);
+    }
+    for (int k = 0; k != tetris->get_number_tetrimino; k++) {
+        tetris->tetrimino[k].tetrimino = my_str_to_word_array(register_file[k]);
+    }
+    put_error_value_to_null(tetris);
+    check_first_line(tetris);
+
+    return (0);
+}
+
+char *get_width(char *width)
+{
+    int i = 0;
+    char *register_width = malloc(sizeof(char) * i);
+
+    for (; width[i] != ' '; i++) {
+        register_width[i] = width[i];
+    }
+    return (register_width);
+}
+
+char *get_height(char *height)
+{
+    int k = 0;
+    char *register_height = malloc(sizeof(char) * k);
+
+    int counter = 0;
+
+    for (int i = 0; height[i] != '\0'; i++) {
+        if (height[i] == ' ') {
+            counter++;
+        }
+        if (counter == 1) {
+            register_height[k] = height[i + 1];
+            k++;
+        }
+    }
+    return (register_height);
+}
+
+char *get_color(char *color)
+{
+    int k = 0;
+    char *register_color = malloc(sizeof(char) * k);
+
+
+    int counter = 0;
+
+    for (int i = 0; color[i] != '\0'; i++) {
+        if (color[i] == ' ') {
+            counter++;
+        }
+        if (counter == 2) {
+            register_color[k] = color[i + 1];
+            k++;
+        }
+    }
+    return (register_color);
+}
+
+int my_str_isnum2(char *str)
+{
+    int i;
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if ((str[i] < '0' && str[i] > '9') || str[i] != ' ' || str[i] != '\0')
+            return (1);
+        else
+            return (0);
+    }
+    return (0);
+}
+
+void put_error_value_to_null(tetris_t *tetris)
+{
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        tetris->tetrimino[i].error_detected = 0;
+    }
+}
+
+void get_number_first_line(tetris_t *tetris, int i)
+{
+    char *width;
+    char *height;
+    char *color;
+
+
+    width = get_width(tetris->tetrimino[i].tetrimino[0]);
+    height = get_height(tetris->tetrimino[i].tetrimino[0]);
+    color = get_color(tetris->tetrimino[i].tetrimino[0]);
+    tetris->tetrimino[i].width = my_getnbr(width);
+    tetris->tetrimino[i].height = my_getnbr(height);
+    tetris->tetrimino[i].color = my_getnbr(color);
+
+}
+
+
+int check_first_line(tetris_t *tetris)
+{
+
+
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        if (count_space_str(tetris->tetrimino[i].tetrimino[0]) == 2  && (tetris->tetrimino[i].tetrimino[0][0] >= '0' &&
+            tetris->tetrimino[i].tetrimino[0][0] <= '9')
+            && my_str_isnum2(tetris->tetrimino[i].tetrimino[0]) == 1) {
+            get_number_first_line(tetris, i);
+        }
+        else
+            tetris->tetrimino[i].error_detected = 1;
+
+
+    }
+
+}
+
+int count_space_str(char *str)
+{
+    int counter = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ' ')
+            counter++;
+    }
+    return (counter);
 }
 
 void get_name(tetris_t *tetris)
@@ -37,9 +259,24 @@ void get_name(tetris_t *tetris)
     }
 }
 
+char *my_strcat1(char *dest, char const *src)
+{
+    int length = my_strlen(dest);
+    int i;
+    char *tmp = malloc(sizeof(char) * (my_strlen(dest) + my_strlen(src) + 1));
+
+    for (int j = 0; j < my_strlen(dest); j++)
+        tmp[j] = dest[j];
+    for (i = 0; i < my_strlen(src); i++)
+        tmp[length + i] = src[i];
+    tmp[length + i] = '\0';
+    return (tmp);
+}
+
 int main (int ac, char **av)
 {
     tetris_t *tetris = malloc(sizeof(tetris_t));
+
 
     get_number_file(tetris);
     malloc_file_array(tetris);
@@ -48,10 +285,21 @@ int main (int ac, char **av)
     get_name(tetris);
 
     for (int k = 0; k != tetris->get_number_tetrimino; k++)
-        printf("%s\n", tetris->register_tetrimino_file[k]);
+        my_printf("%s\n", tetris->register_tetrimino_file[k]);
 
     for (int k = 0;k != tetris->get_number_tetrimino; k++)
-        printf("%s\n", tetris->name_tetrimino[k]);
+        my_printf("%s\n", tetris->name_tetrimino[k]);
+
+
+    for (int k = 0;k != tetris->get_number_tetrimino; k++) {
+         tetris->strcat_register_tetrimino_file[k] = my_strcat1("tetriminos/", tetris->register_tetrimino_file[k]);
+        my_printf("%s\n", tetris->strcat_register_tetrimino_file[k]);
+      }
+
+    tetris->tetrimino = malloc(sizeof(tetrimino_t) * tetris->get_number_tetrimino);
+
+    open_txt(tetris);
+
 }
 
 void sort(char **s,int n, tetris_t *tetris)
@@ -63,7 +311,7 @@ void sort(char **s,int n, tetris_t *tetris)
 
     for (i = 0; i < n; i++)
         for (j = 0; j < n - 1; j++) {
-            cmp = my_strcmp(s[j], s[j+1s]);
+            cmp = my_strcmp(s[j], s[j+1]);
             if (cmp > 0) {
                 my_strcpy(tmp[0], s[j+1]);
                 my_strcpy(s[j+1], s[j]);
@@ -75,7 +323,7 @@ void sort(char **s,int n, tetris_t *tetris)
 
 int get_number_file(tetris_t *tetris)
 {
-    DIR *rep = opendir("test_tetris/");
+    DIR *rep = opendir("tetriminos/");
     tetris->get_number_tetrimino = 0;
     tetris->get_max_size = 0;
     int i = 0;
@@ -96,7 +344,7 @@ int get_number_file(tetris_t *tetris)
 
 int reopen_get_number_file(tetris_t *tetris)
 {
-    DIR * rep = opendir("test_tetris/");
+    DIR *rep = opendir("tetriminos/");
     int i = 0;
     int j = 0;
 
@@ -119,15 +367,20 @@ int malloc_file_array(tetris_t *tetris)
     
     int i = 0;
     int j = 0;
+    int k = 0;
 
     tetris->register_tetrimino_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
     tetris->name_tetrimino = malloc(sizeof(char *) * tetris->get_number_tetrimino);
+    tetris->strcat_register_tetrimino_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
 
     for (i; i != tetris->get_number_tetrimino; i++)
         tetris->register_tetrimino_file[i] = malloc(sizeof(char) * tetris->get_max_size);
 
     for (j; j != tetris->get_number_tetrimino; j++)
-        tetris->name_tetrimino[j] = malloc(sizeof(char) * (tetris->get_max_size - 10));
+        tetris->name_tetrimino[j] = malloc(sizeof(char) * (tetris->get_max_size - my_strlen(".tetrimino")));
+
+    for (k; k != tetris->get_number_tetrimino; k++)
+        tetris->strcat_register_tetrimino_file[k] = malloc(sizeof(char) * (tetris->get_max_size + my_strlen("tetrimino/")));
 
 }
 
@@ -149,63 +402,6 @@ void init_debug_mode(tetris_t *tetris)
     printf("Tetriminos: %d\n", tetris->get_number_tetrimino);
 }
 
-static int  is_max(char *str, int iterator)
-{
-  char      *max;
-  int       iterator2;
-
-  max = "2147483648";
-  iterator2 = 0;
-  while (iterator2 <= 9)
-    {
-      if (str[iterator + iterator2] != max[iterator2])
-    return (0);
-      iterator2 += 1;
-    }
-  return (1);
-}
-
-static int  get_sign(char *str, int *iterator, int *is_neg)
-{
-  while (!('0' <= str[*iterator] && str[*iterator] <= '9'))
-    {
-      if (str[*iterator] != '+' && str[*iterator] != '-')
-    return (0);
-      if (str[*iterator] == '-')
-    {
-      if (*is_neg == 0)
-        *is_neg = 1;
-      else
-        *is_neg = 0;
-    }
-      *iterator += 1;
-    }
-  return (0);
-}
-
-int my_getnbr1(char *str)
-{
-  int   iterator;
-  int   nbr;
-  int   is_neg;
-
-  is_neg = 0;
-  iterator = 0;
-  nbr = 0;
-  get_sign(str, &iterator, &is_neg);
-  if (is_max(str, iterator))
-    return (-2147483648);
-  while ('0' <= str[iterator] && str[iterator] <= '9')
-    {
-      nbr = nbr * 10 + str[iterator] - 48;
-      if (nbr < 0)
-    return (0);
-      iterator += 1;
-    }
-  if (is_neg)
-    nbr *= -1;
-  return (nbr);
-}
 
 int my_str_isnum1(char *str)
 {
@@ -215,7 +411,7 @@ int my_str_isnum1(char *str)
   is_alpha = 1;
   i = -1;
   while (str[(i = i + 1)] != '\0')
-    if (!(str[i] < 47 && str[i] > 58))
+    if (!(str[i] < 47 && str[i] > 58) && str[i] != 32)
       is_alpha = 0;
   return (is_alpha);
 }
