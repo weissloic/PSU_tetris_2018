@@ -100,7 +100,34 @@ int get_size_file(tetris_t *tetris)
         counter_size += fichier.st_size;
     }
     return (counter_size);
+}
 
+
+void malloc_tetrimino_struct(tetris_t *tetris)
+{
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        if (tetris->tetrimino[i].error_detected == 0) {
+            tetris->tetrimino[i].form_tetrimino = malloc(sizeof(char *) * tetris->tetrimino[i].height);
+            for (int k = 0; k != tetris->tetrimino[i].height; k++) {
+                tetris->tetrimino[i].form_tetrimino[k] = malloc(sizeof(char) * tetris->tetrimino[i].width);
+            }
+        }
+    }
+}
+
+void get_form_tetrimino(tetris_t *tetris)
+{
+    int j;
+
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        j = 0;
+        if (tetris->tetrimino[i].error_detected == 0) {
+            for (int k = 1; tetris->tetrimino[i].tetrimino[k] != NULL; k++) {
+                tetris->tetrimino[i].form_tetrimino[j] = tetris->tetrimino[i].tetrimino[k];
+                j++;
+            }
+        }
+    }
 }
 
 int open_txt(tetris_t *tetris)
@@ -108,7 +135,7 @@ int open_txt(tetris_t *tetris)
     char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
 
     for (int i = 0; i != tetris->get_number_tetrimino; i++)
-        register_file[i] = malloc(sizeof(char) * 10);
+        register_file[i] = malloc(sizeof(char) * get_size_file(tetris));
 
     int fd;
     int size;
@@ -127,6 +154,12 @@ int open_txt(tetris_t *tetris)
     }
     put_error_value_to_null(tetris);
     check_first_line(tetris);
+    malloc_tetrimino_struct(tetris);
+    get_form_tetrimino(tetris);
+
+
+    for (int i = 0; i != 2; i++)
+        printf("%s\n", tetris->tetrimino[1].form_tetrimino[i]);
 
     return (0);
 }
@@ -467,14 +500,14 @@ void init_keybinding(tetris_t *tetris)
 
 void check_level(tetris_t *tetris, char *optarg)
 {
-        int bool_letter_level = 0;
+    int bool_letter_level = 0;
 
-                for (int i = 0; optarg[i] != '\0'; i++) {
-                    if (optarg[i] < '0' || optarg[i] > '9')
-                        bool_letter_level = 1;
-                }
-                if (bool_letter_level == 0)
-                    tetris->level_num = my_getnbr(optarg);
+    for (int i = 0; optarg[i] != '\0'; i++) {
+        if (optarg[i] < '0' || optarg[i] > '9')
+            bool_letter_level = 1;
+    }
+    if (bool_letter_level == 0)
+        tetris->level_num = my_getnbr(optarg);
 
 }
 

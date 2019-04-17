@@ -41,6 +41,7 @@
 
 typedef struct tetrimono_s {
     char **tetrimino;
+    char **form_tetrimino;
     int width;
     int height;
     int color;
