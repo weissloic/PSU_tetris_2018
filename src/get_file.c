@@ -250,10 +250,10 @@ int open_txt(tetris_t *tetris)
         if (tetris->tetrimino[k].error_detected == 0) {
         fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
         if (fd < 0)
-            return (84);
+            tetris->tetrimino[k].error_detected == 1;
         size = read(fd, register_file[k], (get_size_file(tetris) + 1000));
         if (size <= 0)
-            return (84);
+            tetris->tetrimino[k].error_detected == 1;
     }
         //my_printf("%s\n", register_file[k]);
     }
@@ -354,6 +354,8 @@ void get_number_first_line(tetris_t *tetris, int i)
 int check_first_line(tetris_t *tetris)
 {
     for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        if (tetris->tetrimino[i].error_detected == 0) {
+
         if (tetris->tetrimino[i].tetrimino[0][0] == '\0')
             tetris->tetrimino[i].error_detected = 1;
         else if (count_space_str(tetris->tetrimino[i].tetrimino[0]) == 2  && (tetris->tetrimino[i].tetrimino[0][0] >= '0' &&
@@ -363,6 +365,7 @@ int check_first_line(tetris_t *tetris)
         }
         else
             tetris->tetrimino[i].error_detected = 1;
+    }
     }
 }
 
@@ -708,6 +711,7 @@ int main(int argc, char **argv)
         return (84);
     printf("qzddzq\n");
     check_first_line(tetris);
+    printf("qzddzq\n");
     malloc_tetrimino_struct(tetris);
     get_form_tetrimino(tetris);
     malloc_tetrimino_without_space(tetris);
