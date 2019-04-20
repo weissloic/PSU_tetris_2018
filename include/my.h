@@ -19,29 +19,32 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <sys/ioctl.h>
+#include <termios.h>
 
 #ifndef MY_H_
 #define MY_H_
 #define READ_SIZE 80
 
-    static struct option long_options[] = {
-            {"level",     required_argument, 0,  'L' },
-            {"key-left",  required_argument, 0, 'l'},
-            {"key-right",  required_argument, 0, 'r'},
-            {"key-turn",  required_argument, 0, 't'},
-            {"key-drop",  required_argument, 0, 'd'},
-            {"key-quit",  required_argument, 0, 'q'},
-            {"key-pause",  required_argument, 0, 'p'},
-            {"map-size",  required_argument, 0, 'm'},
-            {"without-next",  0, NULL, 'w'},
-            {"debug",  no_argument, 0, 'D'},
-            {"help",  no_argument, 0, 'h'},
-            {NULL, 0, NULL, 0}
-        };
+static struct option long_options[] = {
+    {"level",     required_argument, 0,  'L' },
+    {"key-left",  required_argument, 0, 'l'},
+    {"key-right",  required_argument, 0, 'r'},
+    {"key-turn",  required_argument, 0, 't'},
+    {"key-drop",  required_argument, 0, 'd'},
+    {"key-quit",  required_argument, 0, 'q'},
+    {"key-pause",  required_argument, 0, 'p'},
+    {"map-size",  required_argument, 0, 'm'},
+    {"without-next",  0, NULL, 'w'},
+    {"debug",  no_argument, 0, 'D'},
+    {"help",  no_argument, 0, 'h'},
+    {NULL, 0, NULL, 0}
+};
 
 typedef struct tetrimono_s {
     char **tetrimino;
     char **form_tetrimino;
+    char **tetri_without_final_space;
     int width;
     int height;
     int color;
@@ -62,6 +65,7 @@ typedef struct tetris_s {
     char *key_quit;
     char *key_pause;
     int next_tetris;
+    char **register_keybind;
     int map_size_col;
     int map_size_row;
     int without_next;
