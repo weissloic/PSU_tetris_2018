@@ -623,10 +623,10 @@ void init_debug_mode(tetris_t *tetris)
     my_printf("*** DEBUG MODE ***\n");
     int left = (my_strcmp(tetris->key_left, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Left : %s\n", tetris->key_left);
     int right = (my_strcmp(tetris->key_right, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Right : %s\n", tetris->key_right);
-    int turn = (my_strcmp(tetris->key_turn, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Turn : %s\n", tetris->key_turn);
-    int drop = (my_strcmp(tetris->key_drop, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Drop : %s\n", tetris->key_drop);;
-    int quit = (my_strcmp(tetris->key_quit, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Quit : %s\n", tetris->key_quit);
-    int pause = (my_strcmp(tetris->key_pause, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Pause : %s\n", tetris->key_pause);
+    int turn = (my_strcmp(tetris->key_turn, " ") == 0) ? my_printf("Key Turn : %s\n", space) : my_printf("Key Turn : %s\n", tetris->key_turn);
+    int drop = (my_strcmp(tetris->key_drop, " ") == 0) ? my_printf("Key Drop : %s\n", space) : my_printf("Key Drop : %s\n", tetris->key_drop);;
+    int quit = (my_strcmp(tetris->key_quit, " ") == 0) ? my_printf("Key Quit : %s\n", space) : my_printf("Key Quit : %s\n", tetris->key_quit);
+    int pause = (my_strcmp(tetris->key_pause, " ") == 0) ? my_printf("Key Pause : %s\n", space) : my_printf("Key Pause : %s\n", tetris->key_pause);
     int next = tetris->next_tetris == 0 ? my_printf("Next : %s\n", no) : my_printf("Next : %s\n", yes);
     my_printf("Level : %d\n", tetris->level_num);
     my_printf("Size : %d*%d\n", tetris->map_size_row, tetris->map_size_col);
@@ -752,10 +752,10 @@ void init_keybinding(tetris_t *tetris)
 {
     tetris->key_left = "^EOD";
     tetris->key_right = "^EOC";
-    tetris->key_turn = " ";
-    tetris->key_drop = "x";
+    tetris->key_turn = "^EOA";
+    tetris->key_drop = "^EOB";
     tetris->key_quit = "q";
-    tetris->key_pause = "p";
+    tetris->key_pause = " ";
     tetris->level_num = 1;
     tetris->map_size_col = 20;
     tetris->map_size_row = 10;
