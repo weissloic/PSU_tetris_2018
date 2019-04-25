@@ -9,8 +9,8 @@
 
 CC		:= gcc
 
-NAME		:= tetris
-FILES		:= read errors replace_keys replace_keys2 bindings check_read functions get_infos malloc get_file
+NAME		:= my_tetris
+FILES		:= read errors replace_keys replace_keys2 bindings check_read functions get_infos malloc get_file open check_infos check_infos2 count get_infos2 display
 
 SRC_NAMES 	:= $(addsuffix .c, $(FILES))
 SRC		:= $(addprefix src/, $(SRC_NAMES))

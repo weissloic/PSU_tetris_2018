@@ -140,7 +140,7 @@ int check_lines(solver_t *solver);
 int check_cols(solver_t *solver);
 int size_line(char const *str);
 int condition(char c);
-int display_help(void);
+int display_help(char *name);
 int count_line_return(char *str);
 int get_size_file(tetris_t *tetris);
 void fill_tetris_without_space(tetris_t *tetris);

@@ -64,3 +64,10 @@ int check_lines(solver_t *solver)
     i--;
     return (i);
 }
+
+void put_error_value_to_null(tetris_t *tetris)
+{
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        tetris->tetrimino[i].error_detected = 0;
+    }
+}
