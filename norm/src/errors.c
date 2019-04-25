@@ -69,5 +69,8 @@ void put_error_value_to_null(tetris_t *tetris)
 {
     for (int i = 0; i != tetris->get_number_tetrimino; i++) {
         tetris->tetrimino[i].error_detected = 0;
+    tetris->tetrimino[i].width = 0;
+    tetris->tetrimino[i].height = 0;
+    tetris->tetrimino[i].color = 0;
     }
 }

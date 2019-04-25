@@ -99,7 +99,7 @@ int check_level(tetris_t *tetris, char *optarg)
             bool_letter_level = 1;
     }
     if (bool_letter_level == 1)
-        tetris->level_num = my_atoi(optarg);
+        tetris->level_num = my_getnbr(optarg);
     else {
         my_printf("WRONG LEVEL\n");
         return (84);

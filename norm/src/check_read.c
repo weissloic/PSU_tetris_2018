@@ -16,18 +16,19 @@ char *my_strdup(char const *src)
     return (str);
 }
 
-char **my_str_to_word_array(char const *buffer)
+char **my_str_to_word_array(char *buffer, tetris_t *tetris)
 {
-    char **word_array;
+    char **word_array = NULL;
     int n = 0;
     int x = 0;
     int y = 0;
 
-    word_array = malloc(sizeof(char *) * (size_line(buffer) + 2));
-    while (buffer[y] != '\0') {
+    word_array = malloc(sizeof(char *) * tetris->get_number_tetrimino + 1);
+
+    while (buffer[y] != NULL) {
         for (x = 0; condition(buffer[x + y]); x++);
         if (x != 0) {
-            word_array[n] = malloc(sizeof(char) * x + 2);
+            word_array[n] = malloc(sizeof(char) * (tetris->get_max_size + 2));
             my_strncpy(word_array[n], buffer + y, x);
             word_array[n][x] = '\0';
             n++;
@@ -36,7 +37,8 @@ char **my_str_to_word_array(char const *buffer)
         if (buffer[y] != '\0')
             y++;
     }
-    word_array[n] = NULL;
+    buffer[y] = '\0';
+    word_array[n] = '\0';
     return (word_array);
 }
 

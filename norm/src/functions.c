@@ -6,15 +6,16 @@
 */
 #include "../include/my.h"
 
-unsigned my_atoui(char *str)
-{
-    unsigned  res;
 
-    res = 0;
-    while ((*str >= '0') && (*str <= '9')){
+unsigned int my_atoui(char *str)
+{
+    unsigned int res = 0;
+    int i = 0;
+
+    while ((str[i] >= '0') && (str[i] <= '9')){
         res *= 10;
-        res += *str - '0';
-        str++;
+        res += str[i] - '0';
+        i++;
     }
     return (res);
 }
@@ -22,6 +23,8 @@ unsigned my_atoui(char *str)
 int my_atoi(char *str)
 {
     int neg;
+    int number = 0;
+    int number_two = 0;
 
     neg = 0;
     while (*str == '-' || *str == '+') {
@@ -29,10 +32,11 @@ int my_atoi(char *str)
             neg = !neg;
         str++;
     }
+
     if (neg)
-        return (-((int) my_atoui(str)));
+        return (number = (-1 * my_atoui(str)));
     else
-        return ((int) my_atoui(str));
+        return (number_two = my_atoui(str));
 }
 
 char *my_strncpy(char *dest, char const *src, int n)

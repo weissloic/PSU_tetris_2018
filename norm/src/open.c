@@ -18,7 +18,7 @@ int open_txt(tetris_t *tetris)
 
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         if (tetris->tetrimino[k].error_detected == 0) {
-        fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
+            fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
             if (fd < 0)
                 tetris->tetrimino[k].error_detected == 1;
             size = read(fd, register_file[k], (get_size_file(tetris)));
@@ -27,8 +27,9 @@ int open_txt(tetris_t *tetris)
         }
     }
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
+        tetris->tetrimino[k].tetrimino = NULL;
         if (tetris->tetrimino[k].error_detected == 0)
-            tetris->tetrimino[k].tetrimino = my_str_to_word_array(register_file[k]);
+            tetris->tetrimino[k].tetrimino = my_str_to_word_array(register_file[k], tetris);
     }
     return (0);
 }
@@ -49,7 +50,6 @@ int reopen_get_number_file(tetris_t *tetris)
                 i++;
             }
         }
-    //closedir (rep);
     }
     return 0;
 }

@@ -21,20 +21,11 @@ void get_name(tetris_t *tetris)
 
 void get_number_first_line(tetris_t *tetris, int i)
 {
-    char *width = malloc(sizeof(char) * 4);
-    char *height = malloc(sizeof(char) * 4);
-    char *color = malloc(sizeof(char) * 4);
-    tetris->tetrimino[i].width = 0;
-    tetris->tetrimino[i].height = 0;
-    tetris->tetrimino[i].color = 0;
 
-    width = get_width(tetris->tetrimino[i].tetrimino[0]);
-    height = get_height(tetris->tetrimino[i].tetrimino[0]);
-    color = get_color(tetris->tetrimino[i].tetrimino[0]);
-    tetris->tetrimino[i].width = my_atoi(width);
-    tetris->tetrimino[i].height = my_atoi(height);
-    //printf("%d\n", tetris->tetrimino[i].height);
-    tetris->tetrimino[i].color = my_atoi(color);
+
+    tetris->tetrimino[i].width = my_atoi(get_width(tetris->tetrimino[i].tetrimino[0]));
+    tetris->tetrimino[i].height = my_atoi(get_height(tetris->tetrimino[i].tetrimino[0]));
+    tetris->tetrimino[i].color = my_atoi(get_color(tetris->tetrimino[i].tetrimino[0]));
 }
 
 char *get_width(char *width)
@@ -45,7 +36,7 @@ char *get_width(char *width)
     for (; width[i] != ' '; i++) {
         register_width[i] = width[i];
     }
-    register_width[i + 1] = '\0';
+    register_width[i] = '\0';
     return (register_width);
 }
 
@@ -74,9 +65,7 @@ char *get_height(char *height)
         register_height[k] = height[o];
         k++;
     }
-    //register_height[o + 1] = NULL;
-
-    //printf("%s\n", register_height);
+    register_height[k] = '\0';
 
     return (register_height);
 }
@@ -87,25 +76,20 @@ char *get_color(char *color)
     int o = 0;
     char *register_color = malloc(sizeof(char) * (my_strlen(color) + 1));
 
-
-    int counter = 0;
-
     for (; color[o] != ' '; o++);
 
     for (; color[o] == ' '; o++);
     
-        //printf("%c\n", height[o]);
-
     for (; color[o] != ' '; o++);
 
     for (; color[o] == ' '; o++);
 
-        for (; color[o] != '\0'; o++) {
+    for (; color[o] != '\0'; o++) {
 
         register_color[k] = color[o];
         k++;
     }
-    register_color[o] = '\0';
+    register_color[k] = '\0';
 
     return (register_color);
 }
