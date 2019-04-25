@@ -44,7 +44,7 @@ int reopen_get_number_file(tetris_t *tetris)
         struct dirent *ent;
         while ((ent = readdir(rep)) != NULL){
             pos = my_strlen(ent->d_name) - 10;
-            if (ent->d_name[0] != '.' && ent->d_name[my_strlen(ent->d_name) - 1] != '~' && !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
+            if (ent->d_name[my_strlen(ent->d_name) - 1] != '~' && !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
                 tetris->register_tetrimino_file[i] = ent->d_name;
                 i++;
             }

@@ -47,7 +47,7 @@ int get_number_file(tetris_t *tetris)
         struct dirent *ent;
         while ((ent = readdir(rep)) != NULL){
             pos = my_strlen(ent->d_name) - 10;
-            if (ent->d_name[0] != '.' && ent->d_name[my_strlen(ent->d_name) - 1] != '~' && !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
+            if (ent->d_name[my_strlen(ent->d_name) - 1] != '~' && !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
                 tetris->get_number_tetrimino++;
             if (my_strlen(ent->d_name) > tetris->get_max_size)
                 tetris->get_max_size = my_strlen(ent->d_name);

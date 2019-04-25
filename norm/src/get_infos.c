@@ -12,7 +12,7 @@ void get_name(tetris_t *tetris)
     int i = 0;
 
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
-        for (j = 0; tetris->register_tetrimino_file[k][j] != '.'; j++) {
+        for (j = 0; j != my_strlen(tetris->register_tetrimino_file[k]) - 10; j++) {
                 tetris->name_tetrimino[k][j] = tetris->register_tetrimino_file[k][j];
         }
     }

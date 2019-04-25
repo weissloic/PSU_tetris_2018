@@ -142,13 +142,37 @@ void init_debug_mode(tetris_t *tetris)
     set_read_mode(0);
 }
 
-int main(int argc, char **argv)
+int check_env(char **env)
+{
+    if (env == NULL || env[0] == NULL)
+        return (84);
+}
+
+char *get_env(char **env)
+{
+    int i = 0;
+
+    for (; env[i] != NULL; i++)
+        if (!my_strncmp("TERM=", env[i], 4))
+            return ((char *)(env[i] + 5));
+
+    return (NULL);
+}
+
+
+int main(int argc, char **argv, char **env)
 {
     tetris_t *tetris = malloc(sizeof(tetris_t));
     int c;
     init_keybinding(tetris);
     int digit_optind = 0;
     int init_debug = 0;
+
+        char *term;
+
+
+    if (check_env(env) == 84 || (!(term = get_env(env))))
+        return 84;
 
     const char *flag="L:l:r:t:d:q:p:m:wDh";
 
@@ -198,6 +222,7 @@ int main(int argc, char **argv)
                 return 84;
             break;
            case 'D': init_debug = 1; break;
+           case '?': my_printf("INVALID OPTION\n"); break;
            case 'h': return (display_help(argv[0]));; break;
            default: printf("RETURN 84\n");
         }
