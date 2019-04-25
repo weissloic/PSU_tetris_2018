@@ -22,6 +22,18 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
+# include <time.h>
+# include <ncurses.h>
+# include <curses.h>
+
+# include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <termios.h>
+# include <sys/ioctl.h>
+# include <dirent.h>
+
+
 #ifndef MY_H_
 #define MY_H_
 #define READ_SIZE 80

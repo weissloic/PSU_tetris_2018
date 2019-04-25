@@ -7,6 +7,7 @@
 
 #include "my.h"
 
+
 void fill_tetris_without_space(tetris_t *tetris)
 {
     int k = 0; 
@@ -29,7 +30,6 @@ void set_read_mode(int mode)
 {
     static struct termios termsave;
     static struct termios term;
-
     if (mode == 1) {
         ioctl(0, TCGETS, &term);
         ioctl(0, TCGETS, &termsave);
@@ -164,7 +164,8 @@ int main(int argc, char **argv, char **env)
 {
     tetris_t *tetris = malloc(sizeof(tetris_t));
     int c;
-    init_keybinding(tetris);
+    char *smkx;
+
     int digit_optind = 0;
     int init_debug = 0;
 
@@ -173,6 +174,11 @@ int main(int argc, char **argv, char **env)
 
     if (check_env(env) == 84 || (!(term = get_env(env))))
         return 84;
+
+    /*if (!(smkx = tigetstr("smkx")) || putp(smkx) == ERR)
+        return 84;*/
+
+    init_keybinding(tetris);
 
     const char *flag="L:l:r:t:d:q:p:m:wDh";
 
