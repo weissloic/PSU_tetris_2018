@@ -20,6 +20,7 @@ void fill_tetris_without_space(tetris_t *tetris)
                 for (; l < tetris->tetrimino[i].width; l++) {
                     tetris->tetrimino[i].tetri_without_final_space[k][l] = tetris->tetrimino[i].form_tetrimino[k][l];
                 }
+                tetris->tetrimino[i].tetri_without_final_space[k][l] = '\0';
                 l = 0;
             }
         }
@@ -85,12 +86,17 @@ void set_read_mode(int mode)
     //freeArray(tetris->register_tetrimino_file, 8);
 }*/
 
-void sort(char **s,int n, tetris_t *tetris)
+void sort(char **s, int n, tetris_t *tetris)
 {
     int i = 0;
     int j = 0;
     int cmp = 0;
-    char tmp[0][tetris->get_number_tetrimino];
+    char **tmp = malloc(sizeof(char * ) * 100);
+
+    for (int o = 0; o != 100; o++)
+        tmp[o] = malloc(sizeof(char) * 100);
+
+    tmp[0][tetris->get_number_tetrimino];
 
     for (i = 0; i < n; i++)
         for (j = 0; j < n - 1; j++) {
@@ -164,7 +170,6 @@ int main(int argc, char **argv, char **env)
 {
     tetris_t *tetris = malloc(sizeof(tetris_t));
     int c;
-    char *smkx;
 
     int digit_optind = 0;
     int init_debug = 0;
@@ -175,13 +180,9 @@ int main(int argc, char **argv, char **env)
     if (check_env(env) == 84 || (!(term = get_env(env))))
         return 84;
 
-    /*if (!(smkx = tigetstr("smkx")) || putp(smkx) == ERR)
-        return 84;*/
-
     init_keybinding(tetris);
 
     const char *flag="L:l:r:t:d:q:p:m:wDh";
-
     get_number_file(tetris);
     malloc_file_array(tetris);
     reopen_get_number_file(tetris);

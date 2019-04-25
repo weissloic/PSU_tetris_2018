@@ -11,14 +11,14 @@ void register_binding(tetris_t *tetris)
     tetris->register_keybind = malloc(sizeof(char *) * 6);
 
     for (int i = 0; i != 6; i++) {
-        tetris->register_keybind[i] = malloc(sizeof(char) * my_strlen("^EOD"));
+        tetris->register_keybind[i] = malloc(sizeof(char) * my_strlen("^EOD") + 1);
     }
-    tetris->register_keybind[0] =  tetris->key_left;
-    tetris->register_keybind[1] =  tetris->key_right;
-    tetris->register_keybind[2] =  tetris->key_turn;
-    tetris->register_keybind[3] =  tetris->key_drop;
-    tetris->register_keybind[4] =  tetris->key_quit;
-    tetris->register_keybind[5] =  tetris->key_pause;
+    tetris->register_keybind[0] = tetris->key_left;
+    tetris->register_keybind[1] = tetris->key_right;
+    tetris->register_keybind[2] = tetris->key_turn;
+    tetris->register_keybind[3] = tetris->key_drop;
+    tetris->register_keybind[4] = tetris->key_quit;
+    tetris->register_keybind[5] = tetris->key_pause;
 }
 
 int check_binding(tetris_t *tetris)
@@ -58,14 +58,14 @@ int check_binding(tetris_t *tetris)
 
 void init_keybinding(tetris_t *tetris)
 {
-    tetris->key_left = "^EOD";
-    tetris->key_right = "^EOC";
-    tetris->key_turn = "^EOA";
-    tetris->key_drop = "^EOB";
-    tetris->key_quit = "q";
-    tetris->key_pause = " ";
+    tetris->key_left = my_strdup("^EOD");
+    tetris->key_right = my_strdup("^EOC");
+    tetris->key_turn = my_strdup("^EOA");
+    tetris->key_drop = my_strdup("^EOB");
+    tetris->key_quit = my_strdup("q");
+    tetris->key_pause = my_strdup(" ");
     tetris->level_num = 1;
     tetris->map_size_col = 20;
     tetris->map_size_row = 10;
-    tetris->next_tetris = "Yes";
+    tetris->next_tetris = 1;
 }

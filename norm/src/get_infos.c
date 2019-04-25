@@ -15,6 +15,7 @@ void get_name(tetris_t *tetris)
         for (j = 0; j != my_strlen(tetris->register_tetrimino_file[k]) - 10; j++) {
                 tetris->name_tetrimino[k][j] = tetris->register_tetrimino_file[k][j];
         }
+        tetris->name_tetrimino[k][j] = '\0';
     }
 }
 
@@ -23,6 +24,9 @@ void get_number_first_line(tetris_t *tetris, int i)
     char *width = malloc(sizeof(char) * 4);
     char *height = malloc(sizeof(char) * 4);
     char *color = malloc(sizeof(char) * 4);
+    tetris->tetrimino[i].width = 0;
+    tetris->tetrimino[i].height = 0;
+    tetris->tetrimino[i].color = 0;
 
     width = get_width(tetris->tetrimino[i].tetrimino[0]);
     height = get_height(tetris->tetrimino[i].tetrimino[0]);
@@ -36,12 +40,12 @@ void get_number_first_line(tetris_t *tetris, int i)
 char *get_width(char *width)
 {
     int i = 0;
-    char *register_width = malloc(sizeof(char) * 4);
+    char *register_width = malloc(sizeof(char) * (my_strlen(width) + 1));
 
     for (; width[i] != ' '; i++) {
         register_width[i] = width[i];
     }
-    register_width[i + 1] = NULL;
+    register_width[i + 1] = '\0';
     return (register_width);
 }
 
@@ -52,7 +56,7 @@ char *get_height(char *height)
     int i = 1;
     int o = 0;
     int space = 0;
-    char *register_height = malloc(sizeof(char) * 4);
+    char *register_height = malloc(sizeof(char) * (my_strlen(height) + 1));
 
     int counter = 0;
 
@@ -81,7 +85,7 @@ char *get_color(char *color)
 {
     int k = 0;
     int o = 0;
-    char *register_color = malloc(sizeof(char) * 4);
+    char *register_color = malloc(sizeof(char) * (my_strlen(color) + 1));
 
 
     int counter = 0;
@@ -101,7 +105,7 @@ char *get_color(char *color)
         register_color[k] = color[o];
         k++;
     }
-    register_color[o] = NULL;
+    register_color[o] = '\0';
 
     return (register_color);
 }

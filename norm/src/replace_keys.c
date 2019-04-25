@@ -9,39 +9,39 @@
 int replace_keyleft(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_left = optarg;
+    tetris->key_left = my_strdup(optarg);
 }
 
 int replace_keyright(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_right = optarg;
+    tetris->key_right = my_strdup(optarg);
 }
 
 int replace_keyturn(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_turn = optarg;
+    tetris->key_turn = my_strdup(optarg);
 }
 
 int replace_keydrop(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_drop = optarg;
+    tetris->key_drop = my_strdup(optarg);
 }
 
 int replace_keyquit(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_quit = optarg;
+    tetris->key_quit = my_strdup(optarg);
 }

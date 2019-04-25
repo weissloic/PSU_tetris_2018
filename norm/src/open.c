@@ -11,7 +11,7 @@ int open_txt(tetris_t *tetris)
     char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
 
     for (int i = 0; i != tetris->get_number_tetrimino; i++)
-        register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1000);
+        register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
 
     int fd;
     int size;
@@ -21,7 +21,7 @@ int open_txt(tetris_t *tetris)
         fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
             if (fd < 0)
                 tetris->tetrimino[k].error_detected == 1;
-            size = read(fd, register_file[k], (get_size_file(tetris)) + 1000);
+            size = read(fd, register_file[k], (get_size_file(tetris)));
             if (size <= 0)
                 tetris->tetrimino[k].error_detected == 1;
         }
@@ -49,7 +49,7 @@ int reopen_get_number_file(tetris_t *tetris)
                 i++;
             }
         }
-    closedir (rep);
+    //closedir (rep);
     }
     return 0;
 }

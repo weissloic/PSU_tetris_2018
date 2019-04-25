@@ -15,6 +15,7 @@ void get_form_tetrimino(tetris_t *tetris)
         j = 0;
         if (tetris->tetrimino[i].error_detected == 0) {
             for (int k = 1; tetris->tetrimino[i].tetrimino[k] != NULL; k++) {
+                //printf("%d\n", k);
                 tetris->tetrimino[i].form_tetrimino[j] = tetris->tetrimino[i].tetrimino[k];
                 j++;
             }
@@ -53,7 +54,7 @@ int get_number_file(tetris_t *tetris)
                 tetris->get_max_size = my_strlen(ent->d_name);
             }
         }
-    closedir (rep);
+    //closedir (rep);
     }
     return 0;
 }

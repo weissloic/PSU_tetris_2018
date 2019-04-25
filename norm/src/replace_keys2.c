@@ -9,7 +9,7 @@
 int replace_keypause(char *optarg, tetris_t *tetris)
 {
     if (my_strlen(optarg) != 1)
-        return 84;
+        return;
 
-    tetris->key_pause = optarg;
+    tetris->key_pause = my_strdup(optarg);
 }

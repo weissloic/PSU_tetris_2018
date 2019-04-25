@@ -23,11 +23,11 @@ char **my_str_to_word_array(char const *buffer)
     int x = 0;
     int y = 0;
 
-    word_array = malloc(sizeof(char *) * (size_line(buffer) + 1));
+    word_array = malloc(sizeof(char *) * (size_line(buffer) + 2));
     while (buffer[y] != '\0') {
         for (x = 0; condition(buffer[x + y]); x++);
         if (x != 0) {
-            word_array[n] = malloc(sizeof(char) * x + 1);
+            word_array[n] = malloc(sizeof(char) * x + 2);
             my_strncpy(word_array[n], buffer + y, x);
             word_array[n][x] = '\0';
             n++;
