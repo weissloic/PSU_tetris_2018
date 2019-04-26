@@ -8,9 +8,10 @@
 
 int open_txt(tetris_t *tetris)
 {
+    int i = 0;
     char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
 
-    for (int i = 0; i != tetris->get_number_tetrimino; i++)
+    for (i; i != tetris->get_number_tetrimino; i++)
         register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
 
     int fd;

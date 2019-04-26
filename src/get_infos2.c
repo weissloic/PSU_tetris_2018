@@ -9,9 +9,10 @@
 void get_form_tetrimino(tetris_t *tetris)
 {
     int j;
+    int i = 0;
     int o = 0;
 
-    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+    for (; i != tetris->get_number_tetrimino; i++) {
         j = 0;
         if (tetris->tetrimino[i].error_detected == 0) {
             for (int k = 1; tetris->tetrimino[i].tetrimino[k] != NULL; k++) {
@@ -20,7 +21,9 @@ void get_form_tetrimino(tetris_t *tetris)
                 j++;
             }
         }
+
     }
+            //tetris->tetrimino[i].form_tetrimino[j] = '\0';
 }
 
 int get_size_file(tetris_t *tetris)

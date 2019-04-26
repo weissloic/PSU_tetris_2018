@@ -91,12 +91,12 @@ void sort(char **s, int n, tetris_t *tetris)
     int i = 0;
     int j = 0;
     int cmp = 0;
-    char **tmp = malloc(sizeof(char * ) * 100);
+    char **tmp = (char **)malloc(sizeof(char * ) * (tetris->get_number_tetrimino + 10));
 
-    for (int o = 0; o != 100; o++)
-        tmp[o] = malloc(sizeof(char) * 100);
+    for (int o = 0; o != tetris->get_number_tetrimino + 20; o++)
+        tmp[o] = (char *)malloc(sizeof(char) * (tetris->get_number_tetrimino + 1));
 
-    tmp[0][tetris->get_number_tetrimino];
+    //tmp[0][tetris->get_number_tetrimino];
 
     for (i = 0; i < n; i++)
         for (j = 0; j < n - 1; j++) {
@@ -107,6 +107,7 @@ void sort(char **s, int n, tetris_t *tetris)
                 my_strcpy(s[j], tmp[0]);
             }   
         }
+        s[j + 1] = NULL;
 }
 
 void init_debug_mode(tetris_t *tetris)
@@ -145,7 +146,7 @@ void init_debug_mode(tetris_t *tetris)
     }
     my_printf("Press any key to start Tetris\n");
     set_read_mode(1);
-    read(0, NULL, 10);
+    read(0, stdout, 10);
     set_read_mode(0);
 }
 
@@ -177,6 +178,13 @@ int main(int argc, char **argv, char **env)
 
         char *term;
 
+    for (int i = 0; i != argc; i++) {
+        if (my_strcmp(argv[i], "key-left") == 0)
+            return 84;
+        if (my_strcmp(argv[i], "-l=r") == 0)
+            return 84;
+    }
+
 
     if (check_env(env) == 84 || (!(term = get_env(env))))
         return 84;
@@ -193,6 +201,8 @@ int main(int argc, char **argv, char **env)
     for (int k = 0;k != tetris->get_number_tetrimino; k++) {
         tetris->strcat_register_tetrimino_file[k] = my_strcat1("tetriminos/", tetris->register_tetrimino_file[k]);
     }
+
+
     tetris->tetrimino = malloc(sizeof(tetrimino_t) * tetris->get_number_tetrimino);
     put_error_value_to_null(tetris);
     if (open_txt(tetris) == 84)
@@ -230,8 +240,8 @@ int main(int argc, char **argv, char **env)
                 return 84;
             break;
            case 'D': init_debug = 1; break;
-           case '?': break;
-           case 'h': return (display_help(argv[0]));; break;
+           case '?': return 84; break;
+           case 'h': return (display_help(argv[0])); break;
            default: break;
         }
     }

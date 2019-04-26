@@ -65,7 +65,8 @@ void check_error_tetrimino(tetris_t *tetris)
 
                 if (check_letter_str(tetris->tetrimino[i].form_tetrimino[j]) != 0)
                     counter_false_letter++;
-                if ((tetris->tetrimino[i].form_tetrimino[j][0] == ' ' && (check_stars_line(tetris->tetrimino[i].form_tetrimino[j]) > 0))
+                if ((tetris->tetrimino[i].form_tetrimino[j][0] == ' ' &&
+                    (check_stars_line(tetris->tetrimino[i].form_tetrimino[j]) > 0))
                     || tetris->tetrimino[i].form_tetrimino[j][0] == '*') {
                     counter++;
                 }
