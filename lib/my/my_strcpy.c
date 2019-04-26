@@ -5,6 +5,9 @@
 ** my_strcpy
 */
 
+#include <stddef.h>
+#include <stdlib.h>
+
 char *my_strcpy(char *dest, char const *src)
 {
     int i;

@@ -35,7 +35,6 @@ int check_size(solver_t *solver)
     solver->cols = check_cols(solver);
     solver->lines = check_lines(solver);
     if (solver->lines != solver->width || solver->cols != solver->lenght) {
-        printf("ok");
         return (84);
     }
 
@@ -46,7 +45,7 @@ int check_cols(solver_t *solver)
     int cols = 0;
 
     for (int i = 0; i != my_strlen(solver->map[1]); i++) {
-        if (solver->map[1][i] != ' ') {
+        if (solver->map[1][i] == '*') {
             cols++;
         }
     }
@@ -64,4 +63,14 @@ int check_lines(solver_t *solver)
     }
     i--;
     return (i);
+}
+
+void put_error_value_to_null(tetris_t *tetris)
+{
+    for (int i = 0; i != tetris->get_number_tetrimino; i++) {
+        tetris->tetrimino[i].error_detected = 0;
+    tetris->tetrimino[i].width = 0;
+    tetris->tetrimino[i].height = 0;
+    tetris->tetrimino[i].color = 0;
+    }
 }

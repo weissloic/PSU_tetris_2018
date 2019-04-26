@@ -22,6 +22,18 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
+# include <time.h>
+# include <ncurses.h>
+# include <curses.h>
+
+# include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <termios.h>
+# include <sys/ioctl.h>
+# include <dirent.h>
+
+
 #ifndef MY_H_
 #define MY_H_
 #define READ_SIZE 80
@@ -133,6 +145,61 @@ void display_percentage();
 char **get_map(solver_t *solver, const char *path);
 int get_number_line(const char *path);
 static char **malloc_map(int line);
+char *get_color(char *color);
+char *get_height(char *height);
+char *get_width(char *width);
+int check_lines(solver_t *solver);
+int check_cols(solver_t *solver);
+int size_line(char const *str);
+int condition(char c);
+int display_help(char *name);
+int count_line_return(char *str);
+int get_size_file(tetris_t *tetris);
+void fill_tetris_without_space(tetris_t *tetris);
+int check_letter_str(char *str);
+void get_form_tetrimino(tetris_t *tetris);
+int check_stars_line(char *str);
+void check_error_tetrimino(tetris_t *tetris);
+int open_txt(tetris_t *tetris);
+void put_error_value_to_null(tetris_t *tetris);
+int check_first_line(tetris_t *tetris);
+int count_space_str(char *str);
+void set_read_mode(int mode);
+void freeArray(char **a, int m);
+void sort(char **s,int n, tetris_t *tetris);
+int get_number_file(tetris_t *tetris);
+int reopen_get_number_file(tetris_t *tetris);
+void init_debug_mode(tetris_t *tetris);
+int check_map_size(tetris_t *tetris, char *optarg);
+int check_level(tetris_t *tetris, char *optarg);
+char *my_strdup(char const *src);
+char **my_str_to_word_array(char *buffer, tetris_t *tetris);
+int my_str_isnum2(char *str);
+char *my_strcat1(char *dest, char const *src);
+int replace_keyleft(char *optarg, tetris_t *tetris);
+int replace_keyright(char *optarg, tetris_t *tetris);
+int replace_keyturn(char *optarg, tetris_t *tetris);
+int replace_keydrop(char *optarg, tetris_t *tetris);
+int replace_keyquit(char *optarg, tetris_t *tetris);
+int replace_keypause(char *optarg, tetris_t *tetris);
+void register_binding(tetris_t *tetris);
+int check_binding(tetris_t *tetris);
+void init_keybinding(tetris_t *tetris);
+char *my_strdup(char const *src);
+int my_str_isnum2(char *str);
+char *my_strcat1(char *dest, char const *src);
+unsigned my_atoui(char *str);
+int my_atoi(char *str);
+char *my_strncpy(char *dest, char const *src, int n);
+int my_str_isnum1(char *str);
+void get_name(tetris_t *tetris);
+void get_number_first_line(tetris_t *tetris, int i);
+char *get_width(char *width);
+char *get_height(char *height);
+char *get_color(char *color);
+void malloc_tetrimino_struct(tetris_t *tetris);
+void malloc_tetrimino_without_space(tetris_t *tetris);
+int malloc_file_array(tetris_t *tetris);
 
 static void (*ptr1[9])(va_list) = {
     &display_int,

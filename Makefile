@@ -10,13 +10,13 @@
 CC		:= gcc
 
 NAME		:= tetris
-FILES		:= get_file read errors
+FILES		:= read errors replace_keys replace_keys2 bindings check_read functions get_infos malloc get_file open check_infos check_infos2 count get_infos2 display
 
 SRC_NAMES 	:= $(addsuffix .c, $(FILES))
 SRC		:= $(addprefix src/, $(SRC_NAMES))
 
 CINC		:= -I include/
-CFLAGS		:= -W -Wextra -Wall -g
+CFLAGS		:= -g
 LDFLAGS		:= -L./lib/my -lmy -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system -lcurses
 
 OBJ             := $(SRC:src/%.c=obj/%.o)
