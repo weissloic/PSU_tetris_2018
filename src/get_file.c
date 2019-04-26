@@ -116,6 +116,7 @@ void init_debug_mode(tetris_t *tetris)
     char *yes = "Yes";
     char *no = "No";
     my_printf("*** DEBUG MODE ***\n");
+    //int left2 = (my_strcmp(tetris->key_left, "\0") == 0) ? my_printf("Key Left : %s\n", "\0") : my_printf("Key Left : %s\n", "\0");
     int left = (my_strcmp(tetris->key_left, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Left : %s\n", tetris->key_left);
     int right = (my_strcmp(tetris->key_right, " ") == 0) ? my_printf("Key Left : %s\n", space) : my_printf("Key Right : %s\n", tetris->key_right);
     int turn = (my_strcmp(tetris->key_turn, " ") == 0) ? my_printf("Key Turn : %s\n", space) : my_printf("Key Turn : %s\n", tetris->key_turn);
@@ -217,21 +218,21 @@ int main(int argc, char **argv, char **env)
            if (check_level(tetris, optarg) == 84)
             return (84);
            break;
-           case 'l': if (replace_keyleft(optarg, tetris) == 84) return 84; break;
-           case 'r': if (replace_keyright(optarg, tetris) == 84) return 84; break;
-           case 't': if (replace_keyturn(optarg, tetris) == 84) return 84; break;
-           case 'd': if (replace_keydrop(optarg, tetris) == 84) return 84; break;
-           case 'q': if (replace_keyquit(optarg, tetris) == 84) return 84; break;
-           case 'p': if (replace_keypause(optarg, tetris) == 84) return 84; break;
+           case 'l': replace_keyleft(optarg, tetris);; break;
+           case 'r': replace_keyright(optarg, tetris); break;
+           case 't': replace_keyturn(optarg, tetris); break;
+           case 'd': replace_keydrop(optarg, tetris); break;
+           case 'q': replace_keyquit(optarg, tetris); break;
+           case 'p': replace_keypause(optarg, tetris); break;
            case 'w': tetris->next_tetris = 0; break;
            case 'm':
             if (check_map_size(tetris, optarg) == 84)
                 return 84;
             break;
            case 'D': init_debug = 1; break;
-           case '?': my_printf("INVALID OPTION\n"); break;
+           case '?': break;
            case 'h': return (display_help(argv[0]));; break;
-           default: printf("RETURN 84\n");
+           default: break;
         }
     }
     register_binding(tetris);

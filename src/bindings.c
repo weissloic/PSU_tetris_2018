@@ -65,7 +65,7 @@ void init_keybinding(tetris_t *tetris)
     tetris->key_quit = my_strdup("q");
     tetris->key_pause = my_strdup(" ");
     tetris->level_num = 1;
-    tetris->map_size_col = 20;
-    tetris->map_size_row = 10;
+    tetris->map_size_col = 10;
+    tetris->map_size_row = 20;
     tetris->next_tetris = 1;
 }
