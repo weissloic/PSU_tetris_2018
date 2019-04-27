@@ -26,7 +26,7 @@ int display_help(char *str)
     size = read(fd, buff, sizeof(buff));
     if (size <= 0)
         exit(84);
-    printf(buff);
+    my_printf("%s", buff);
     close(fd);
     return (0);
 }

@@ -51,63 +51,24 @@ void set_read_mode(int mode)
     ioctl(0, TCSETS, &termsave);
 }
 
-/*int main (int ac, char **av)
-{
-    tetris_t *tetris = malloc(sizeof(tetris_t));
-
-
-    get_number_file(tetris);
-    malloc_file_array(tetris);
-    reopen_get_number_file(tetris);
-    sort(tetris->register_tetrimino_file, tetris->get_number_tetrimino, tetris);
-    get_name(tetris);
-
-    for (int k = 0;k != tetris->get_number_tetrimino; k++) {
-        tetris->strcat_register_tetrimino_file[k] = my_strcat1("tetriminos/", tetris->register_tetrimino_file[k]);
-         //my_printf("%s\n", tetris->strcat_register_tetrimino_file[k]);
-    }
-    tetris->tetrimino = malloc(sizeof(tetrimino_t) * tetris->get_number_tetrimino);
-
-    open_txt(tetris);
-    put_error_value_to_null(tetris);
-    check_first_line(tetris);
-    malloc_tetrimino_struct(tetris);
-    get_form_tetrimino(tetris);
-    malloc_tetrimino_without_space(tetris);
-    check_error_tetrimino(tetris);
-    fill_tetris_without_space(tetris);
-
-    init_debug_mode(tetris);
-
-
-
-    //freeArray(tetris->strcat_register_tetrimino_file, tetris->get_number_tetrimino);
-    //freeArray(tetris->name_tetrimino, tetris->get_number_tetrimino);
-    //freeArray(tetris->register_tetrimino_file, 8);
-}*/
-
 void sort(char **s, int n, tetris_t *tetris)
 {
-    int i = 0;
-    int j = 0;
-    int cmp = 0;
-    char **tmp = (char **)malloc(sizeof(char * ) * (tetris->get_number_tetrimino + 10));
+    int i, j, cmp;
+    char tmp[10];
 
-    for (int o = 0; o != tetris->get_number_tetrimino + 20; o++)
-        tmp[o] = (char *)malloc(sizeof(char) * (tetris->get_number_tetrimino + 1));
+    if (n <= 1)
+        return;
 
-    //tmp[0][tetris->get_number_tetrimino];
-
-    for (i = 0; i < n; i++)
-        for (j = 0; j < n - 1; j++) {
-            cmp = my_strcmp(s[j], s[j+1]);
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n-1; j++) {
+            cmp = strcmp(s[j], s[j+1]);
             if (cmp > 0) {
-                my_strcpy(tmp[0], s[j+1]);
-                my_strcpy(s[j+1], s[j]);
-                my_strcpy(s[j], tmp[0]);
-            }   
+                strcpy(tmp, s[j+1]);
+                strcpy(s[j+1], s[j]);
+                strcpy(s[j], tmp);
+            }
         }
-        s[j + 1] = NULL;
+    }
 }
 
 void init_debug_mode(tetris_t *tetris)
@@ -163,8 +124,192 @@ char *get_env(char **env)
     for (; env[i] != NULL; i++)
         if (!my_strncmp("TERM=", env[i], 4))
             return ((char *)(env[i] + 5));
-
     return (NULL);
+}
+
+void check_arg(char **argv, int argc)
+{
+    for (int i = 0; i != argc; i++) {
+        if (my_strncmp(argv[i], "-L=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-l=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-r=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-t=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-d=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-q=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strncmp(argv[i], "-p=", 3) == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+    }
+}
+
+void check_arg_two(int argc, char **argv)
+{
+    for (int i = 0; i != argc; i++) {
+        if (my_strcmp(argv[i], "--level=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-right=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-turn=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-drop=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-quit=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-pause=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--map-size=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+    }   
+}
+
+
+void check_arg_three(int argc, char **argv)
+{
+    for (int i = 0; i != argc; i++) {
+        if (my_strcmp(argv[i], "--level") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-right") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-left=") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-turn") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-drop") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-quit") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--key-pause") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "--map-size") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+    }   
+}
+
+void check_arg_four(int argc, char **argv)
+{
+    for (int i = 0; i != argc; i++) {
+        if (my_strcmp(argv[i], "level") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-right") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-turn") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-left") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-drop") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-quit") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "key-pause") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "map-size") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "debug") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+        if (my_strcmp(argv[i], "without-next") == 0) {
+            write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
+            exit(84);
+        }
+    }   
 }
 
 
@@ -178,23 +323,10 @@ int main(int argc, char **argv, char **env)
 
         char *term;
 
-    for (int i = 0; i != argc; i++) {
-        if (my_strcmp(argv[i], "key-left") == 0) {
-            write(2, "ERROR\n", 7);
-            write(1, "ERROR\n", 7);
-            exit(84);
-        }
-        if (my_strcmp(argv[i], "-l=r") == 0) {
-            write(2, "ERROR\n", 7);
-            write(1, "ERROR\n", 7);
-            exit(84);
-        }
-        if (my_strcmp(argv[i], "--key-left=") == 0) {
-            write(2, "ERROR\n", 7);
-            write(1, "ERROR\n", 7);
-            exit(84);
-        }
-    }
+        check_arg(argv, argc);
+        check_arg_two(argc, argv);
+        check_arg_three(argc, argv);
+        check_arg_four(argc, argv);
 
 
     if (check_env(env) == 84 || (!(term = get_env(env)))) {
@@ -204,7 +336,7 @@ int main(int argc, char **argv, char **env)
 
     init_keybinding(tetris);
 
-    const char *flag="L:l:r:t:d:q:p:m:wDh";
+    const char *flag="-L:-l:-r:-t:-d:-q:-p:-m:-wDh";
     get_number_file(tetris);
     malloc_file_array(tetris);
     reopen_get_number_file(tetris);
@@ -238,8 +370,11 @@ int main(int argc, char **argv, char **env)
 
        switch (c) {
            case 'L':
-           if (check_level(tetris, optarg) == 84)
-            return (84);
+           if (check_level(tetris, optarg) == 84) {
+                write(2, "ERROR\n", 7);
+                write(1, "ERROR\n", 7);
+                exit(84);
+            }
            break;
            case 'l': replace_keyleft(optarg, tetris);; break;
            case 'r': replace_keyright(optarg, tetris); break;
@@ -249,8 +384,11 @@ int main(int argc, char **argv, char **env)
            case 'p': replace_keypause(optarg, tetris); break;
            case 'w': tetris->next_tetris = 0; break;
            case 'm':
-            if (check_map_size(tetris, optarg) == 84)
-                return 84;
+            if (check_map_size(tetris, optarg) == 84) {
+                write(2, "ERROR\n", 7);
+                write(1, "ERROR\n", 7);
+                exit(84);
+            }
             break;
            case 'D': init_debug = 1; break;
            case '?': 
@@ -263,7 +401,9 @@ int main(int argc, char **argv, char **env)
     }
     register_binding(tetris);
     if (check_binding(tetris) == 84) {
-        write(2, "ERROR\n", 7); exit(84);
+        write(2, "ERROR\n", 7);
+        write(1, "ERROR\n", 7);
+        exit(84);
     }
    if (init_debug == 1) {
         init_debug_mode(tetris);
