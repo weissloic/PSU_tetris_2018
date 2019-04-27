@@ -181,14 +181,17 @@ int main(int argc, char **argv, char **env)
     for (int i = 0; i != argc; i++) {
         if (my_strcmp(argv[i], "key-left") == 0) {
             write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
             exit(84);
         }
         if (my_strcmp(argv[i], "-l=r") == 0) {
             write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
             exit(84);
         }
         if (my_strcmp(argv[i], "--key-left=") == 0) {
             write(2, "ERROR\n", 7);
+            write(1, "ERROR\n", 7);
             exit(84);
         }
     }
@@ -250,8 +253,11 @@ int main(int argc, char **argv, char **env)
                 return 84;
             break;
            case 'D': init_debug = 1; break;
-           case '?':  write(2, "ERROR\n", 7); exit(84); break;
-           case 'h': return (display_help(argv[0])); break;
+           case '?': 
+                write(2, "ERROR\n", 7);
+                write(1, "ERROR\n", 7);
+                exit(84); break;
+           case 'h': display_help(argv[0]); break;
            default: break;
         }
     }

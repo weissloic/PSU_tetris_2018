@@ -13,15 +13,22 @@ int condition(char c)
     return (0);
 }
 
-int display_help(char *name)
+int display_help(char *str)
 {
-    char *s;
-    int fd = open("help", O_RDONLY);
-    printf("Usage: %s [options]\n", name);
-    while (s = get_next_line(fd)) {
-        printf("%s\n", s);
-        free(s);
-    }
+    int fd;
+    int size;
+    char buff[800];
+
+    my_printf("Usage: %s [options]\n", str);
+    fd = open("help", O_RDONLY);
+    if (fd < 0)
+        exit(84);
+    size = read(fd, buff, sizeof(buff));
+    if (size <= 0)
+        exit(84);
+    printf(buff);
+    close(fd);
+    return (0);
 }
 
 void freeArray(char **a, int m)
