@@ -6,31 +6,38 @@
 */
 #include "../include/my.h"
 
-int open_txt(tetris_t *tetris)
+int open_txt_two(tetris_t *tetris)
 {
-    int i = 0;
-    char **register_file = malloc(sizeof(char *) * 
-    tetris->get_number_tetrimino);
-    for (i; i != tetris->get_number_tetrimino; i++)
-        register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
 
     int fd;
     int size;
-    for (int k = 0; k != tetris->get_number_tetrimino; k++) {
+     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         if (tetris->tetrimino[k].error_detected == 0) {
             fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
             if (fd < 0)
                 tetris->tetrimino[k].error_detected == 1;
-            size = read(fd, register_file[k], (get_size_file(tetris)));
+            size = read(fd, tetris->register_file[k], (get_size_file(tetris)));
             if (size <= 0)
                 tetris->tetrimino[k].error_detected == 1;
         }
-    }
+    }   
+}
+
+int open_txt(tetris_t *tetris)
+{
+    int i = 0;
+    tetris->register_file = malloc(sizeof(char *) * 
+    tetris->get_number_tetrimino);
+    for (i; i != tetris->get_number_tetrimino; i++)
+        tetris->register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
+
+
+    open_txt_two(tetris);
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         tetris->tetrimino[k].tetrimino = NULL;
         if (tetris->tetrimino[k].error_detected == 0)
             tetris->tetrimino[k].tetrimino = 
-            my_str_to_word_array(register_file[k], tetris);
+            my_str_to_word_array(tetris->register_file[k], tetris);
     }
     return (0);
 }
