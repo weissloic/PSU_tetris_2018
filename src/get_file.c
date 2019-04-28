@@ -31,13 +31,13 @@ void sort(char **s, int n, tetris_t *tetris)
 
     for (i = 0; i < n; i++) {
         for (j = 0; j < n-1; j++) {
-            cmp = strcmp(tetris->register_tetrimino_file[j], 
+            cmp = my_strcmp(tetris->register_tetrimino_file[j], 
             tetris->register_tetrimino_file[j+1]);
             if (cmp > 0) {
-                strcpy(tmp, tetris->register_tetrimino_file[j+1]);
-                strcpy(tetris->register_tetrimino_file[j+1], 
+                my_strcpy(tmp, tetris->register_tetrimino_file[j+1]);
+                my_strcpy(tetris->register_tetrimino_file[j+1], 
                 tetris->register_tetrimino_file[j]);
-                strcpy(tetris->register_tetrimino_file[j], tmp);
+                my_strcpy(tetris->register_tetrimino_file[j], tmp);
             }
         }
     }

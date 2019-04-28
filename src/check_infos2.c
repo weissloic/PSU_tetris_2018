@@ -9,12 +9,16 @@
 
 int row_check(tetris_t *tetris, char *optarg)
 {
-    for (tetris->fill_contain_row_col; optarg[tetris->fill_contain_row_col] != ','; 
+    for (tetris->fill_contain_row_col;
+        optarg[tetris->fill_contain_row_col] != ','; 
     tetris->fill_contain_row_col++)
-        tetris->contain_row[tetris->fill_contain_row_col] = optarg[tetris->fill_contain_row_col];
-    for (tetris->fill_contain_row_col; optarg[tetris->fill_contain_row_col + 1] != '\0'; 
-    tetris->fill_contain_row_col++) {
-        tetris->contain_col[tetris->fill_contain_n] = optarg[tetris->fill_contain_row_col + 1];
+        (tetris->contain_row[tetris->fill_contain_row_col] =
+        optarg[tetris->fill_contain_row_col]);
+    for (tetris->fill_contain_row_col;
+        optarg[tetris->fill_contain_row_col + 1] != '\0'; 
+        tetris->fill_contain_row_col++) {
+        (tetris->contain_col[tetris->fill_contain_n] =
+        optarg[tetris->fill_contain_row_col + 1]);
         tetris->fill_contain_n++;
     }
 }
