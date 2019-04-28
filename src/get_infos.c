@@ -12,8 +12,10 @@ void get_name(tetris_t *tetris)
     int i = 0;
 
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
-        for (j = 0; j != my_strlen(tetris->register_tetrimino_file[k]) - 10; j++) {
-                tetris->name_tetrimino[k][j] = tetris->register_tetrimino_file[k][j];
+        for (j = 0; j != my_strlen(tetris->register_tetrimino_file[k]) - 10; 
+        j++) {
+            tetris->name_tetrimino[k][j] = 
+            tetris->register_tetrimino_file[k][j];
         }
         tetris->name_tetrimino[k][j] = '\0';
     }
@@ -23,9 +25,12 @@ void get_number_first_line(tetris_t *tetris, int i)
 {
 
 
-    tetris->tetrimino[i].width = my_atoi(get_width(tetris->tetrimino[i].tetrimino[0]));
-    tetris->tetrimino[i].height = my_atoi(get_height(tetris->tetrimino[i].tetrimino[0]));
-    tetris->tetrimino[i].color = my_atoi(get_color(tetris->tetrimino[i].tetrimino[0]));
+    tetris->tetrimino[i].width = 
+    my_atoi(get_width(tetris->tetrimino[i].tetrimino[0]));
+    tetris->tetrimino[i].height = 
+    my_atoi(get_height(tetris->tetrimino[i].tetrimino[0]));
+    tetris->tetrimino[i].color = 
+    my_atoi(get_color(tetris->tetrimino[i].tetrimino[0]));
 }
 
 char *get_width(char *width)
@@ -48,18 +53,10 @@ char *get_height(char *height)
     int o = 0;
     int space = 0;
     char *register_height = malloc(sizeof(char) * (my_strlen(height) + 1));
-
     int counter = 0;
-
     for (; height[o] != ' '; o++) {
-        //counter++;
-        //printf("%c\n", height[o]);
     }
-
     for (; height[o] == ' '; o++);
-    
-        //printf("%c\n", height[o]);
-
     for (; height[o] != ' '; o++) {
 
         register_height[k] = height[o];

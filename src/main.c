@@ -77,7 +77,7 @@ int main (int ac, char **av)
     int i = 0;
 
     while (solver->map[i] != NULL) {
-        printf("%s", solver->map[i]);
+        my_printf("%s", solver->map[i]);
         i++;
     }
     if (check_size(solver) == 84) {
