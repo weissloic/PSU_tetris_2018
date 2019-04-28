@@ -180,7 +180,7 @@ void put_error_value_to_null(tetris_t *tetris);
 int check_first_line(tetris_t *tetris);
 int count_space_str(char *str);
 void set_read_mode(int mode);
-void freeArray(char **a, int m);
+void freearray(char **a, int m);
 void sort(char **s,int n, tetris_t *tetris);
 int get_number_file(tetris_t *tetris);
 int reopen_get_number_file(tetris_t *tetris);

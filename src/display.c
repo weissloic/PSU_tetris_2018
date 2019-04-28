@@ -31,7 +31,7 @@ int display_help(char *str)
     return (0);
 }
 
-void freeArray(char **a, int m)
+void freearray(char **a, int m)
 {
     int i;
     for (i = 0; i < m; ++i) {
