@@ -29,3 +29,21 @@ void transform_row_col(tetris_t *tetris, char *contain_row, char *contain_col)
     tetris->map_size_row = my_atoi(contain_row);
     tetris->map_size_col = my_atoi(contain_col);
 }
+
+void analyze_size(solver_t *solver, int i)
+{
+    if (solver->map[0][i] == ' ' && solver->count == 0) {
+        solver->count++;
+        solver->lenght = my_getnbr(solver->str);
+        solver->a = 0;
+        solver->count2++;
+    } else if (solver->map[0][i] == ' ' && solver->count == 1) {
+        solver->width = my_getnbr(solver->str2);
+    } else if (solver->count2 == 0){
+        solver->str[solver->a] = solver->map[0][i];
+        solver->a++;
+    } else if (solver->count2 == 1) {
+        solver->str2[solver->a] = solver->map[0][i];
+        solver->a++;
+    }
+}

@@ -98,6 +98,11 @@ typedef struct solver {
     int width;
     int cols;
     int lines;
+    int a;
+    int count;
+    int count2;
+    char *str;
+    char *str2;
 } solver_t;
 
 void my_putchar(char c);
