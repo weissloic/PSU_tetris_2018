@@ -9,7 +9,8 @@
 int open_txt(tetris_t *tetris)
 {
     int i = 0;
-    char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
+    char **register_file = malloc(sizeof(char *) * 
+    tetris->get_number_tetrimino);
     for (i; i != tetris->get_number_tetrimino; i++)
         register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
 
@@ -28,7 +29,8 @@ int open_txt(tetris_t *tetris)
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         tetris->tetrimino[k].tetrimino = NULL;
         if (tetris->tetrimino[k].error_detected == 0)
-            tetris->tetrimino[k].tetrimino = my_str_to_word_array(register_file[k], tetris);
+            tetris->tetrimino[k].tetrimino = 
+            my_str_to_word_array(register_file[k], tetris);
     }
     return (0);
 }

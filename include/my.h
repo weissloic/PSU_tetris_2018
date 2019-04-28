@@ -82,6 +82,8 @@ typedef struct tetris_s {
     int map_size_row;
     int without_next;
     tetrimino_t *tetrimino;
+    int counter;
+    int fill_contain;
 } tetris_t;
 
 typedef struct solver {
@@ -200,6 +202,26 @@ char *get_color(char *color);
 void malloc_tetrimino_struct(tetris_t *tetris);
 void malloc_tetrimino_without_space(tetris_t *tetris);
 int malloc_file_array(tetris_t *tetris);
+int fill(tetris_t *tetris, int l, int k, int i);
+void print_keys(tetris_t *tetris);
+void print_infos(tetris_t *tetris);
+void print_tetriminos(tetris_t *tetris, int i);
+void check_arg(char **argv, int argc);
+void check_arg_two(int argc, char **argv);
+void check_arg_three(int argc, char **argv);
+char *get_env(char **env);
+int check_env(char **env);
+void check_args_four(int argc, char **argv);
+void check_args_five(int argc, char **argv);
+void check_args_six(int argc, char **argv);
+void check_args_seven(int argc, char **argv);
+void check_args_eight(int argc, char **argv);
+void check_args_nine(int argc, char **argv);
+void check_args_ten(int argc, char **argv);
+void check_args_eleven(int argc, char **argv);
+void check_args_twelve(int argc, char **argv);
+void check_args_thirteen(int argc, char **argv);
+int check_error(solver_t *solver);
 
 static void (*ptr1[9])(va_list) = {
     &display_int,

@@ -8,7 +8,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-
 char *my_strncpy(char *dest, char const *src, int n)
 {
     int i = 0;

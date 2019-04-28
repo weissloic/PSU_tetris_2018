@@ -30,25 +30,17 @@ int check_binding(tetris_t *tetris)
     int counter_drop = 0;
     int counter_quit = 0;
     int counter_pause = 0;
-
     for (int i = 0; i != 6; i++) {
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_right) == 0)
-            counter_right++;
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_turn) == 0)
-            counter_turn++;
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_drop) == 0)
-            counter_drop++;
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_quit) == 0)
-            counter_quit++;
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_pause) == 0)
-            counter_pause++;
-        if (my_strcmp(tetris->register_keybind[i], tetris->key_left) == 0)
-            counter_left++;
+        counter_right = check_right(tetris, i , counter_right);
+        counter_turn = check_turn(tetris, i , counter_turn);
+        counter_drop = check_drop(tetris, i, counter_drop);
+        counter_quit = check_quit(tetris, i, counter_quit);
+        counter_pause = check_pause(tetris, i, counter_pause);
+        counter_left = check_left(tetris, i, counter_left);
     }
     if (counter_left != 1 || counter_right != 1 || counter_turn != 1 ||
-        counter_drop != 1 || counter_pause != 1 || counter_quit != 1) {
-
-    my_printf("%s\n", "KEYBIND ALREADY EXIST");
+    counter_drop != 1 || counter_pause != 1 || counter_quit != 1) {
+        my_printf("%s\n", "KEYBIND ALREADY EXIST");
         return (84);
     }
 }

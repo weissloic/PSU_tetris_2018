@@ -4,7 +4,7 @@
 ** File description:
 ** my_strcpy
 */
-
+#include "../../include/my.h"
 #include <stddef.h>
 #include <stdlib.h>
 

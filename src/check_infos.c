@@ -47,42 +47,23 @@ int check_first_line(tetris_t *tetris)
 
 void check_error_tetrimino(tetris_t *tetris)
 {
-    int k = 0;
-    int counter = 0;
-    int counter_space = 0;
-    int counter_false_letter = 0;
-    int max_lenght = 0;
-    int check_len = 0;
+    tetris->counter = 0;
     for (int i = 0; i != tetris->get_number_tetrimino; i++) {
-        counter = 0;
-        counter_space = 0;
-        counter_false_letter = 0;
-        check_len = 0;
+        tetris->counter = 0;
+        int counter_space = 0;
+        int falsel = 0;
+        int check_len = 0;
         if (tetris->tetrimino[i].error_detected == 0) {
             for (int j = 0; j != tetris->tetrimino[i].height; j++) {
-                max_lenght = 0;
-                if (check_letter_str(tetris->tetrimino[i].form_tetrimino[j]) != 0)
-                    counter_false_letter++;
-                if ((tetris->tetrimino[i].form_tetrimino[j][0] == ' ' &&
-                (check_stars_line(tetris->tetrimino[i].form_tetrimino[j]) > 0))
-                || tetris->tetrimino[i].form_tetrimino[j][0] == '*') {
-                    counter++;
-                }
-                if (tetris->tetrimino[i].form_tetrimino[j][0] == ' ')
-                    counter_space++;
-
+                int max_lenght = 0;
+                falsel = error_false_letter(tetris, i, j, falsel);
+                tetris->counter = error_star_line(tetris, i, j);
+                counter_space = error_count_space(tetris, i, counter_space, j);
                 max_lenght = my_strlen(tetris->tetrimino[i].form_tetrimino[j]);
-                if (max_lenght == tetris->tetrimino[i].width)
-                    check_len++;
+                check_len = error_max_lenght(tetris, i, check_len, max_lenght);
             }
-            if (check_len == 0)
-                tetris->tetrimino[i].error_detected = 1;
-
-            if (counter != tetris->tetrimino[i].height ||
-                counter_space == tetris->tetrimino[i].height ||
-                counter_false_letter != 0 ||
-                tetris->tetrimino[i].color > 7)
-                tetris->tetrimino[i].error_detected = 1;
+            len_check(tetris, i, check_len);
+            check_errors(tetris, i, falsel, counter_space);
         }
     }
 }
