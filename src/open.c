@@ -29,7 +29,8 @@ int open_txt(tetris_t *tetris)
     tetris->register_file = malloc(sizeof(char *) * 
     tetris->get_number_tetrimino);
     for (i; i != tetris->get_number_tetrimino; i++)
-        tetris->register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
+        tetris->register_file[i] = malloc(sizeof(char) * 
+        get_size_file(tetris) + 1);
 
 
     open_txt_two(tetris);
