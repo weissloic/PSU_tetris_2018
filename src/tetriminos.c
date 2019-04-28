@@ -6,7 +6,7 @@
 */
 #include "../include/my.h"
 
-void create_teriminos(tetris_t *tetris)
+int create_teriminos(tetris_t *tetris)
 {
     init_tetriminos(tetris);
     for (int k = 0;k != tetris->get_number_tetrimino; k++) {
@@ -24,6 +24,7 @@ void create_teriminos(tetris_t *tetris)
     malloc_tetrimino_without_space(tetris);
     check_error_tetrimino(tetris);
     fill_tetris_without_space(tetris);
+    return (0);
 }
 
 void init_tetriminos(tetris_t *tetris)

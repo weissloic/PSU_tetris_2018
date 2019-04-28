@@ -42,7 +42,7 @@ void check_arg_two(int argc, char **argv)
             write(1, "ERROR\n", 7);
             exit(84);
         }
-    }   
+    }
 }
 
 void check_arg_three(int argc, char **argv)
@@ -63,7 +63,7 @@ void check_arg_three(int argc, char **argv)
             write(1, "ERROR\n", 7);
             exit(84);
         }
-    }   
+    }
 }
 
 void check_args_four(int argc, char **argv)

@@ -234,6 +234,23 @@ void check_args_eleven(int argc, char **argv);
 void check_args_twelve(int argc, char **argv);
 void check_args_thirteen(int argc, char **argv);
 int check_error(solver_t *solver);
+void init_tetriminos(tetris_t *tetris);
+int create_teriminos(tetris_t *tetris);
+void set_mode_one(struct termios *termsave, struct termios *term);
+void check_errors(tetris_t *tetris, int i, int falsel, int counter_space);
+int error_max_lenght(tetris_t *tetris, int i, int check_len, int max_lenght);
+int error_count_space(tetris_t *tetris, int i, int counter_space, int j);
+int error_star_line(tetris_t *tetris, int i, int j);
+int error_false_letter(tetris_t *tetris, int i, int j, int falsel);
+void check_errors(tetris_t *tetris, int i, int falsel, int counter_space);
+void len_check(tetris_t *tetris, int i, int check_len);
+int check_right(tetris_t *tetris, int i, int counter_right);
+int check_left(tetris_t *tetris, int i, int counter_left);
+int check_pause(tetris_t *tetris, int i, int counter_pause);
+int check_drop(tetris_t *tetris, int i, int counter_drop);
+int check_quit(tetris_t *tetris, int i, int counter_quit);
+int check_turn(tetris_t *tetris, int i, int counter_turn);
+void analyze_size(solver_t *solver, int i);
 
 static void (*ptr1[9])(va_list) = {
     &display_int,

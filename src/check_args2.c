@@ -96,5 +96,5 @@ void check_args_ten(int argc, char **argv)
             write(1, "ERROR\n", 7);
             exit(84);
         }
-    }   
+    }
 }

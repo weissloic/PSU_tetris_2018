@@ -8,10 +8,9 @@
 
 int open_txt_two(tetris_t *tetris)
 {
-
     int fd;
     int size;
-     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
+    for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         if (tetris->tetrimino[k].error_detected == 0) {
             fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
             if (fd < 0)
@@ -20,7 +19,7 @@ int open_txt_two(tetris_t *tetris)
             if (size <= 0)
                 tetris->tetrimino[k].error_detected == 1;
         }
-    }   
+    }
 }
 
 int open_txt(tetris_t *tetris)

@@ -17,7 +17,6 @@ void malloc_tetrimino_struct(tetris_t *tetris)
             (tetris->tetrimino[i].height + 1));
             k = 0;
             for (; k <= tetris->tetrimino[i].height; k++) {
-
                 tetris->tetrimino[i].form_tetrimino[k] = 
                 (char *)malloc(sizeof(char) * 
                 (tetris->tetrimino[i].width + 2));

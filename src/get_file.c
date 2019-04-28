@@ -75,7 +75,7 @@ int main(int argc, char **argv, char **env)
     }
     create_teriminos(tetris);
     optind = 0;
-    const char *flag="-L:-l:-r:-t:-d:-q:-p:-m:-wDh";
+    const char *flag = "-L:-l:-r:-t:-d:-q:-p:-m:-wDh";
     while (1) {
         int this_option_optind = optind ? optind : 1;
         int option_index = 0;
@@ -106,7 +106,7 @@ int main(int argc, char **argv, char **env)
             }
             break;
             case 'D': init_debug = 1; break;
-            case '?': 
+            case '?':
                 write(2, "ERROR\n", 7);
                 write(1, "ERROR\n", 7);
                 exit(84); break;
@@ -123,5 +123,5 @@ int main(int argc, char **argv, char **env)
     if (init_debug == 1) {
         init_debug_mode(tetris);
         init_debug = 0;
-   }
+    }
 }

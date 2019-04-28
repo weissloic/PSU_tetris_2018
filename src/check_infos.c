@@ -68,7 +68,6 @@ void check_error_tetrimino(tetris_t *tetris)
     }
 }
 
-
 int check_level(tetris_t *tetris, char *optarg)
 {
     int bool_letter_level = 0;
