@@ -37,6 +37,7 @@
 #ifndef MY_H_
 #define MY_H_
 #define READ_SIZE 80
+#define MALLOC_ONE (char *)malloc(sizeof(char) * (tetris->get_max_size + 2));
 
 static struct option long_options[] = {
     {"level",     required_argument, 0,  'L' },
