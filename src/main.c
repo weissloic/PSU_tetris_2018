@@ -44,7 +44,7 @@ int manage_window(void)
         mvprintw(a, b, "X");
         refresh();
         ch = getch();
-        if(ch == ' ') {
+        if (ch == ' ') {
             endwin();
             break;
         } if (ch == KEY_UP) {
@@ -77,7 +77,7 @@ int main (int ac, char **av)
     int i = 0;
 
     while (solver->map[i] != NULL) {
-        printf("%s", solver->map[i]);
+        my_printf("%s", solver->map[i]);
         i++;
     }
     if (check_size(solver) == 84) {

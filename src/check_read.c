@@ -22,13 +22,13 @@ char **my_str_to_word_array(char *buffer, tetris_t *tetris)
     int n = 0;
     int x = 0;
     int y = 0;
-
-    word_array = (char **)malloc(sizeof(char *) * (tetris->get_number_tetrimino + 1));
-
+    word_array = (char **)malloc(sizeof(char *) * 
+    (tetris->get_number_tetrimino + 1));
     while (buffer[y] != NULL) {
         for (x = 0; condition(buffer[x + y]); x++);
         if (x != 0) {
-            word_array[n] = (char *)malloc(sizeof(char) * (tetris->get_max_size + 2));
+            word_array[n] = (char *)malloc(sizeof(char) * 
+            (tetris->get_max_size + 2));
             my_strncpy(word_array[n], buffer + y, x);
             word_array[n][x] = '\0';
             n++;
