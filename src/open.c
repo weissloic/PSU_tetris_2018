@@ -10,11 +10,13 @@ int open_txt(tetris_t *tetris)
 {
     int i = 0;
     char **register_file = malloc(sizeof(char *) * tetris->get_number_tetrimino);
+
     for (i; i != tetris->get_number_tetrimino; i++)
         register_file[i] = malloc(sizeof(char) * get_size_file(tetris) + 1);
 
     int fd;
     int size;
+
     for (int k = 0; k != tetris->get_number_tetrimino; k++) {
         if (tetris->tetrimino[k].error_detected == 0) {
             fd = open(tetris->strcat_register_tetrimino_file[k], O_RDONLY);
@@ -44,8 +46,7 @@ int reopen_get_number_file(tetris_t *tetris)
         struct dirent *ent;
         while ((ent = readdir(rep)) != NULL){
             pos = my_strlen(ent->d_name) - 10;
-            if (ent->d_name[my_strlen(ent->d_name) - 1] != '~' && 
-            !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
+            if (ent->d_name[my_strlen(ent->d_name) - 1] != '~' && !(my_strcmp(&ent->d_name[pos], ".tetrimino"))) {
                 tetris->register_tetrimino_file[i] = ent->d_name;
                 i++;
             }

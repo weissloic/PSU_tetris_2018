@@ -22,7 +22,9 @@ char **my_str_to_word_array(char *buffer, tetris_t *tetris)
     int n = 0;
     int x = 0;
     int y = 0;
+
     word_array = (char **)malloc(sizeof(char *) * (tetris->get_number_tetrimino + 1));
+
     while (buffer[y] != NULL) {
         for (x = 0; condition(buffer[x + y]); x++);
         if (x != 0) {
