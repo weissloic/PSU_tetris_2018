@@ -72,7 +72,7 @@ void init_debug_mode(tetris_t *tetris)
     print_infos(tetris);
     for (int i = 0; i != tetris->get_number_tetrimino; i++) {
         my_printf("Tetriminos : Name %s :", tetris->name_tetrimino[i]);
-        print_tetriminos(tetris);
+        print_tetriminos(tetris, i);
     }
     my_printf("Press any key to start Tetris\n");
     set_read_mode(1);

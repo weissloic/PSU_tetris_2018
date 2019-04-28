@@ -4,7 +4,7 @@
 ** File description:
 ** check_args
 */
-#include "my.h"
+#include "../include/my.h"
 
 void check_arg(char **argv, int argc)
 {

@@ -4,7 +4,7 @@
 ** File description:
 ** print
 */
-#include "my.h"
+#include "../include/my.h"
 
 void print_keys(tetris_t *tetris)
 {
