@@ -252,6 +252,9 @@ int check_drop(tetris_t *tetris, int i, int counter_drop);
 int check_quit(tetris_t *tetris, int i, int counter_quit);
 int check_turn(tetris_t *tetris, int i, int counter_turn);
 void analyze_size(solver_t *solver, int i);
+int display_debug_bind(tetris_t *tetris);
+void check_all_args(int argc, char **argv);
+void display_error(void);
 
 static void (*ptr1[9])(va_list) = {
     &display_int,
