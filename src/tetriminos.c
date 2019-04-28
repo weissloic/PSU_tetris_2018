@@ -10,10 +10,10 @@ int create_teriminos(tetris_t *tetris)
 {
     init_tetriminos(tetris);
     for (int k = 0;k != tetris->get_number_tetrimino; k++) {
-        tetris->strcat_register_tetrimino_file[k] = 
+        tetris->strcat_register_tetrimino_file[k] =
         my_strcat1("tetriminos/", tetris->register_tetrimino_file[k]);
     }
-    tetris->tetrimino = malloc(sizeof(tetrimino_t) * 
+    tetris->tetrimino = malloc(sizeof(tetrimino_t) *
     tetris->get_number_tetrimino);
     put_error_value_to_null(tetris);
     if (open_txt(tetris) == 84)

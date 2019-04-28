@@ -91,6 +91,7 @@ typedef struct tetris_s {
     char *contain_row;
     char *contain_col;
     char **register_file;
+    int init_debug;
 } tetris_t;
 
 typedef struct solver {

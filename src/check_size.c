@@ -8,7 +8,7 @@
 
 char *check_row(tetris_t *tetris, int fill_contain_row_col, char *contain_row)
 {
-    for (fill_contain_row_col; optarg[fill_contain_row_col] != ','; 
+    for (fill_contain_row_col; optarg[fill_contain_row_col] != ',';
     fill_contain_row_col++)
         contain_row[fill_contain_row_col] = optarg[fill_contain_row_col];
     return (contain_row);
@@ -16,7 +16,7 @@ char *check_row(tetris_t *tetris, int fill_contain_row_col, char *contain_row)
 
 char *check_line(tetris_t *tetris, int fill_contain_row_col, char *contain_col)
 {
-    for (fill_contain_row_col; optarg[fill_contain_row_col + 1] != '\0'; 
+    for (fill_contain_row_col; optarg[fill_contain_row_col + 1] != '\0';
     fill_contain_row_col++) {
         contain_col[tetris->fill_contain] = optarg[fill_contain_row_col + 1];
         tetris->fill_contain++;

@@ -11,7 +11,7 @@ void register_binding(tetris_t *tetris)
     tetris->register_keybind = malloc(sizeof(char *) * 6);
 
     for (int i = 0; i != 6; i++) {
-        tetris->register_keybind[i] = malloc(sizeof(char) * 
+        tetris->register_keybind[i] = malloc(sizeof(char) *
         my_strlen("^EOD") + 1);
     }
     tetris->register_keybind[0] = tetris->key_left;
@@ -31,8 +31,8 @@ int check_binding(tetris_t *tetris)
     int counter_quit = 0;
     int counter_pause = 0;
     for (int i = 0; i != 6; i++) {
-        counter_right = check_right(tetris, i , counter_right);
-        counter_turn = check_turn(tetris, i , counter_turn);
+        counter_right = check_right(tetris, i, counter_right);
+        counter_turn = check_turn(tetris, i, counter_turn);
         counter_drop = check_drop(tetris, i, counter_drop);
         counter_quit = check_quit(tetris, i, counter_quit);
         counter_pause = check_pause(tetris, i, counter_pause);
@@ -62,7 +62,7 @@ void init_keybinding(tetris_t *tetris)
 int fill(tetris_t *tetris, int l, int k, int i)
 {
     for (; l < tetris->tetrimino[i].width; l++) {
-        tetris->tetrimino[i].tetri_without_final_space[k][l] = 
+        tetris->tetrimino[i].tetri_without_final_space[k][l] =
         tetris->tetrimino[i].form_tetrimino[k][l];
     }
     tetris->tetrimino[i].tetri_without_final_space[k][l] = '\0';

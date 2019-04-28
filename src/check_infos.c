@@ -33,10 +33,10 @@ int check_first_line(tetris_t *tetris)
         if (tetris->tetrimino[i].error_detected == 0) {
             if (tetris->tetrimino[i].tetrimino[0][0] == '\0')
                 tetris->tetrimino[i].error_detected = 1;
-            else if (count_space_str(tetris->tetrimino[i].tetrimino[0]) >= 2 
+            else if (count_space_str(tetris->tetrimino[i].tetrimino[0]) >= 2
             && (tetris->tetrimino[i].tetrimino[0][0] >= '0' &&
             tetris->tetrimino[i].tetrimino[0][0] <= '9')
-            && my_str_isnum2(tetris->tetrimino[i].tetrimino[0]) == 1 && 
+            && my_str_isnum2(tetris->tetrimino[i].tetrimino[0]) == 1 &&
             tetris->tetrimino[i].error_detected == 0) {
                 get_number_first_line(tetris, i);
             } else

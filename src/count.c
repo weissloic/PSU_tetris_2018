@@ -40,3 +40,14 @@ int size_line(char const *str)
     }
     return (nb_line);
 }
+
+int display_debug_bind(tetris_t *tetris)
+{
+    register_binding(tetris);
+    if (check_binding(tetris) == 84)
+        display_error();
+    if (tetris->init_debug == 1) {
+        init_debug_mode(tetris);
+        tetris->init_debug = 0;
+    }
+}
