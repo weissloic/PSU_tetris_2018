@@ -84,6 +84,11 @@ typedef struct tetris_s {
     tetrimino_t *tetrimino;
     int counter;
     int fill_contain;
+    int fill_contain_row_col;
+    int fill_contain_n;
+    int valid_string;
+    char *contain_row;
+    char *contain_col;
 } tetris_t;
 
 typedef struct solver {
