@@ -65,13 +65,9 @@ int main(int argc, char **argv, char **env)
     int init_debug = 0;
     char *term;
     int c;
-
-    check_arg(argv, argc);
-    check_arg_two(argc, argv);
-    check_arg_three(argc, argv);
+    check_all_args(argc, argv);
     if (check_env(env) == 84 || (!(term = get_env(env)))) {
-        write(2, "ERROR\n", 7);
-        exit(84);
+        display_error();
     }
     create_teriminos(tetris);
     optind = 0;
@@ -86,9 +82,7 @@ int main(int argc, char **argv, char **env)
         switch (c) {
             case 'L':
             if (check_level(tetris, optarg) == 84) {
-                write(2, "ERROR\n", 7);
-                write(1, "ERROR\n", 7);
-                exit(84);
+                display_error();
             }
             break;
             case 'l': replace_keyleft(optarg, tetris); break;
@@ -100,25 +94,20 @@ int main(int argc, char **argv, char **env)
             case 'w': tetris->next_tetris = 0; break;
             case 'm':
             if (check_map_size(tetris, optarg) == 84) {
-                write(2, "ERROR\n", 7);
-                write(1, "ERROR\n", 7);
-                exit(84);
+                display_error();
             }
             break;
             case 'D': init_debug = 1; break;
             case '?':
-                write(2, "ERROR\n", 7);
-                write(1, "ERROR\n", 7);
-                exit(84); break;
+            display_error();
+            break;
             case 'h': display_help(argv[0]); break;
             default: break;
         }
     }
     register_binding(tetris);
     if (check_binding(tetris) == 84) {
-        write(2, "ERROR\n", 7);
-        write(1, "ERROR\n", 7);
-        exit(84);
+        display_error();
     }
     if (init_debug == 1) {
         init_debug_mode(tetris);

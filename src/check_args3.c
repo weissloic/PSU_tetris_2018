@@ -63,3 +63,10 @@ void check_args_thirteen(int argc, char **argv)
         }
     }
 }
+
+void check_all_args(int argc, char **argv)
+{
+    check_arg(argv, argc);
+    check_arg_two(argc, argv);
+    check_arg_three(argc, argv);
+}

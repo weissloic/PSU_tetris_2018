@@ -39,3 +39,10 @@ void freeArray(char **a, int m)
     }
     free(a);
 }
+
+void display_error(void)
+{
+    write(2, "ERROR\n", 7);
+    write(1, "ERROR\n", 7);
+    exit(84);
+}
